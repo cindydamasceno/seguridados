@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 import pandas as pd
 import json,os
 
-
 app = Flask(__name__)
 
 ###### CREDENCIAIS ######
@@ -83,15 +82,38 @@ def ANO(ano):
 def MUNICIPIO(cidade):
     df=dados_novos_df()
     df["CdIbge"]=df["CdIbge"]
-    resultado=df[df["Município"] == cidade]    
+    resultado=df[df["CdIbge"] == cidade]    
     return resultado.to_json(orient='records')
 
 # INDICADOR
 @app.route("/INDICADOR/<int:indicador>",methods=["GET"])
 def INDICADOR(indicador):
     df=dados_novos_df()
-    resultado=df[df["CdNatureza"] == indicador]    
+    resultado=df[df["CdIndicador"] == indicador]    
     return resultado.to_json(orient='records',indent=4,force_ascii=False)
+
+@app.route("/REGIAO",methods=["GET"])
+def REGIAO_CONSOLIDADO():
+    # OCORRÊNCIAS SOMADAS POR REGIAO ADMINISTRATIVA
+    df=dados_novos_df()
+    filtro=df.groupby(["Ano", "Natureza", "Regiao"]).size().reset_index(name="Quantidade") 
+    resultado={}
+
+    for index, linha in filtro.iterrows():
+        regiao=linha["Regiao"]
+        ano=linha["Ano"]
+        natureza=linha["Natureza"]
+        quantidade=linha["Quantidade"]
+
+        if regiao not in resultado:
+            resultado[regiao]={}
+
+        if ano not in resultado[regiao]:
+            resultado[regiao][ano]={}
+
+        if natureza not in resultado[regiao][ano]:
+            resultado[regiao][ano].update({natureza: quantidade})
+    return json.dumps(resultado)
 
 # REGIÃO ADMINISTRATIVA ESPECÍFICA 
 @app.route("/REGIAO/<int:regiao>",methods=["GET"])
