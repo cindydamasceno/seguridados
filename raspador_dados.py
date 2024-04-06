@@ -14,7 +14,6 @@ ID_SHEET=os.getenv("ID_SHEET")
 
 with open("KEY_SHEET.json", "w") as f:
     f.write(os.environ["KEY_SHEET"])
-
 ####################################
 
 # INICIA A RASPAGEM NO SITE DA SSPDS-CE
@@ -44,9 +43,33 @@ def padroniza ():
     df=pd.read_excel(link)
     mun=pd.read_csv(URL_PLANILHA)
     
-    # ADIÇÃO DE REGIÕES DE PLANJEAMENTO E CÓDIGO IBGE DOS MUNICÍPIOS FILTRADOS (FONTE: IPECE)
-    dic_mun={}
+    # ADIÇÃO DE REGIÕES DE PLANEJAMENTO (FONTE: IPECE), CÓDIGO IBGE, CÓDIGO DOS INDICADORES
 
+    dic_regiao={
+                "Cariri": 1,
+                "Centro Sul": 2,
+                "Grande Fortaleza": 3,
+                "Litoral Leste": 4,
+                "Litoral Norte": 5,
+                "Litoral Oeste / Vale do Curu": 6,
+                "Maciço de Baturité": 7,
+                "Serra da Ibiapaba": 8,
+                "Sertão Central": 9,
+                "Sertão de Canindé": 10,
+                "Sertão de Sobral": 11,
+                "Sertão dos Crateús": 12,
+                "Sertão dos Inhamuns": 13,
+                "Vale do Jaguaribe": 14
+            }
+
+    dic_indicador={
+        "FEMINICÍDIO": 1,
+        "HOMICIDIO DOLOSO": 2,
+        "LESAO CORPORAL SEGUIDA DE MORTE": 3,
+        "ROUBO SEGUIDO DE MORTE (LATROCINIO)": 4,
+            }
+
+    dic_mun={}
     for index,linha in mun.iterrows():
         municipio=linha["mun"]
         cd=linha["cdibge"]
@@ -58,9 +81,11 @@ def padroniza ():
     df["Ano"]=df["Data"].dt.strftime("%Y")
     df["CdIbge"]=df["Município"].apply(lambda municipio : dic_mun[municipio].get("cd"))
     df["Regiao"]=df["Município"].apply(lambda municipio : dic_mun[municipio].get("regiao"))
+    df["CdRegiao"]=df["Regiao"].apply(lambda regiao : dic_regiao[regiao])
+    df["CdIndicador"]=df["Natureza"].apply(lambda indicador : dic_indicador[indicador])
     df["Data"]=df["Data"].dt.strftime("%d-%m-%Y")
     df['Hora'] = df["Hora"].astype(str).str[:5] # pega os primeiros digitos da hora e ignora os segundos
-    df=df[['Ano', 'Regiao', 'CdIbge' ,'Município', 'AIS', 'Natureza', 'Data', 'Hora', 'Dia da Semana',
+    df=df[['Ano', 'Regiao',"CdRegiao", 'CdIbge' ,'Município', 'AIS', 'Natureza',"CdIndicador", 'Data', 'Hora', 'Dia da Semana',
        'Meio Empregado', 'Gênero', 'Idade da Vítima', 'Escolaridade da Vítima',
        'Raça da Vítima']]
     
@@ -111,5 +136,4 @@ def atualiza_seguridados ():
 def dados_novos_df():
     aba=formata_planilha()
     df = get_as_dataframe(aba)
-    print(df.tail(5).to_string())
     return df

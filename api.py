@@ -1,19 +1,57 @@
-from flask import Flask,jsonify,send_file
+from flask import Flask,jsonify,send_file,request
 from datetime import datetime,timedelta,timezone
 from raspador_dados import atualiza_seguridados,dados_novos_df
 from dotenv import load_dotenv
 import pandas as pd
-import json
+import json,os
+
 
 app = Flask(__name__)
 
-@app.route("/FmIZF3r12r0T0YykrFOTHvKFxMbNTJjI8p7QwN3Ga7M",methods=["GET"])
+###### CREDENCIAIS ######
+load_dotenv()
+ATUALIZA_URL=os.getenv("ATUALIZA_URL")
+#########################
+
+@app.route(f"/{ATUALIZA_URL}",methods=["GET"])
 def agenda_seguridados():
     data=datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=-3))).strftime("%d-%m-%Y-%Hh%M")
     atualiza_seguridados()
     return f"Informações atualizadas em {data}"
 
+########## QUERY PARA FORMULÁRIO HTML #############
+@app.route("/API/PESQUISA",methods=["POST"])
+def PESQUISA(CONSULTA):
+    # RECEBE PARAMETROS DO FORMULARIO HTML (GITPAGES)
+    CONSULTA = request.json # REQUISIÇÃO API FLASK
+    ano = CONSULTA.get('ANO', None)
+    municipio = CONSULTA.get('MUNICIPIO', None)
+    indicador = CONSULTA('INDICADOR', None)
+    data_inicio = CONSULTA('DATA_INICIO', None)
+    data_fim = CONSULTA('DATA_FIM', None)
 
+    if not municipio or indicador:
+        return jsonify({'erro': 'Campos obrigatórios não preenchidos.'})
+    
+    # CRITÉRIOS DE PESQUISA
+    filtro=dados_novos_df().copy # CRIA UMA CÓPIA PARA EVITAR CONFLITO
+    parametros = {
+        'Ano': lambda x: filtro['Ano'] == int(ano),
+        'Municipio': lambda x: filtro['Municipio'] == municipio,
+        'Indicador': lambda x: filtro['Indicador'] == indicador,
+        'DataInicio': lambda x: pd.to_datetime(filtro['Data']) >= pd.to_datetime(data_inicio),
+        'DataFim': lambda x: pd.to_datetime(filtro['Data']) <= pd.to_datetime(data_fim)
+    }
+
+    for parametro, valor in parametros.items():
+        if valor and parametro in parametros:
+            filtro = filtro[parametros[parametro](valor)]
+
+    return filtro.to_json(orient='records')
+
+##################################################
+
+########## ENDPOINTS PARA OUTRAS REQUISIÇÃO #############
 @app.route("/CEARA",methods=["GET"])
 def CEARA():
     # OCORRÊNCIAS POR ESTADO
@@ -49,17 +87,18 @@ def MUNICIPIO(cidade):
     return resultado.to_json(orient='records')
 
 # INDICADOR
-@app.route("/INDICADOR/<indicador>",methods=["GET"])
+@app.route("/INDICADOR/<int:indicador>",methods=["GET"])
 def INDICADOR(indicador):
     df=dados_novos_df()
-    df["Natureza"]=df["Natureza"].str.upper()
-    resultado=df[df["Natureza"] == indicador]    
-    return resultado.to_json(orient='records')
+    resultado=df[df["CdNatureza"] == indicador]    
+    return resultado.to_json(orient='records',indent=4,force_ascii=False)
 
-# REGIÃO ADMINISTRATIVA
-@app.route("/REGIAO/<regiao>",methods=["GET"])
+# REGIÃO ADMINISTRATIVA ESPECÍFICA 
+@app.route("/REGIAO/<int:regiao>",methods=["GET"])
 def REGIAO(regiao):
     df=dados_novos_df()
-    df["Regiao"]=df["Regiao"].str.upper()
-    resultado=df[df["Natureza"] == regiao]    
-    return resultado.to_json(orient='records')
+    resultado=df[df["CdRegiao"] == regiao]    
+    return resultado.to_json(orient='records',indent=4,force_ascii=False)
+
+if __name__=="__main__":
+    app.run(debug=True)
