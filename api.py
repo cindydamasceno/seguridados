@@ -8,7 +8,6 @@ import json,os
 app = Flask(__name__)
 
 ###### CREDENCIAIS ######
-load_dotenv()
 ATUALIZA_URL=os.getenv("ATUALIZA_URL")
 #########################
 
@@ -20,33 +19,44 @@ def agenda_seguridados():
 
 ########## QUERY PARA FORMULÁRIO HTML #############
 @app.route("/API/PESQUISA",methods=["POST"])
-def PESQUISA(CONSULTA):
+def PESQUISA():
     # RECEBE PARAMETROS DO FORMULARIO HTML (GITPAGES)
     CONSULTA = request.json # REQUISIÇÃO API FLASK
-    ano = CONSULTA.get('ANO', None)
-    municipio = CONSULTA.get('MUNICIPIO', None)
-    indicador = CONSULTA('INDICADOR', None)
-    data_inicio = CONSULTA('DATA_INICIO', None)
-    data_fim = CONSULTA('DATA_FIM', None)
+    ano = CONSULTA.get('ANO')
+    municipio = CONSULTA.get('MUNICIPIO')
+    indicador = CONSULTA('INDICADOR')
+    data_inicio = CONSULTA('DATA_INICIO')
+    data_fim = CONSULTA('DATA_FIM')
+    formato=CONSULTA('FORMATO')
 
-    if not municipio or indicador:
+    if not municipio or not indicador:
         return jsonify({'erro': 'Campos obrigatórios não preenchidos.'})
     
     # CRITÉRIOS DE PESQUISA
     filtro=dados_novos_df().copy # CRIA UMA CÓPIA PARA EVITAR CONFLITO
-    parametros = {
-        'Ano': lambda x: filtro['Ano'] == int(ano),
-        'Municipio': lambda x: filtro['Municipio'] == municipio,
-        'Indicador': lambda x: filtro['Indicador'] == indicador,
-        'DataInicio': lambda x: pd.to_datetime(filtro['Data']) >= pd.to_datetime(data_inicio),
-        'DataFim': lambda x: pd.to_datetime(filtro['Data']) <= pd.to_datetime(data_fim)
-    }
 
-    for parametro, valor in parametros.items():
-        if valor and parametro in parametros:
-            filtro = filtro[parametros[parametro](valor)]
+    if ano:
+        filtro=filtro[filtro["Ano"]==ano]
 
-    return filtro.to_json(orient='records')
+    if data_inicio:
+        filtro=filtro[[pd.to_datetime(filtro["Data"],format='%d-%m-%Y')] >= pd.to_datetime(data_inicio,format='%d-%m-%Y')]
+
+    if data_fim:
+        filtro=filtro[[pd.to_datetime(filtro["Data"],format='%d-%m-%Y')] <= pd.to_datetime(data_fim,format='%d-%m-%Y')]
+
+    if formato=="CSV":
+        filtro.to_csv(f"resultado_csv_{municipio}_{indicador}",index=False)
+        return send_file(f"resultado_csv_{municipio}_{indicador}",as_attachment=True)
+
+    if formato=="JSON":
+        filtro.to_json(f"resultado_json_{municipio}_{indicador}", orient="records",indent=4,force_ascii=False)
+        return send_file(f"resultado_json_{municipio}_{indicador}", as_attachment=True)
+
+    if formato=="Planilha - XLSX":
+        filtro.to_excel(f"resultado_excel_{municipio}_{indicador}",index=False)
+        return send_file(f"resultado_excel_{municipio}_{indicador}", as_attachment=True)
+    
+    return "Sucesso! Verifique a caixa de download do seu dispositivo"
 
 ##################################################
 
