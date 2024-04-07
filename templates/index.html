@@ -12,14 +12,14 @@
         <input type="text" id="ano" name="ano"><br><br>
         <label for="municipio">Município:</label>
         <select name="municipio" id="municipio">
-            <!-- <option value="">BUSQUE O MUNICÍPIO</option> -->
+            <option value="">BUSQUE O MUNICÍPIO</option>
             {% for municipio in municipios %}
             <option value="{{ municipio }}">{{ municipio }}</option>
             {% endfor %}
         </select>
         <label for="indicador">Indicador:</label>
         <select name="indicador" id="indicador">
-            <!-- <option value="">BUSQUE O INDICADOR</option> -->
+            <option value="">BUSQUE O INDICADOR</option>
             {% for indicador in indicadores %}
             <option value="{{ indicador }}"> {{ indicador }}</option>
             {% endfor %}

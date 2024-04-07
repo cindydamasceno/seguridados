@@ -26,7 +26,91 @@ def agenda_seguridados():
     atualiza_seguridados()
     return f"Informações atualizadas em {data}"
 
-######################### QUERY PARA FORMULÁRIO MUNICIPIO  ##########################################
+# FORMULÁRIOS A PARTIR DAQUI
+
+# FORMULÁRIO REGIAO
+@app.route("/API/REGIAO")
+def API_REGIAO():
+    # RECEBE PARAMETROS DO FORMULÁRIO DO ESTADO
+    ano = request.form.get('ano_regiao')
+    regiao = request.form.get('ano_regiao')
+    indicador = request.form.get('indicador_regiao')
+    data_inicio = request.form.get('data_inicio_regiao')
+    data_fim = request.form.get('data_fim_regiao')
+    formato=request.form.get('formato_regiao')
+
+    filtro=df.copy() # PARA NÃO SOBRESCREVER
+
+    if not regiao or not ano or not indicador:
+        return "Obrigatório preenchimento de ano, região e do indicador criminal"
+    
+    filtro=filtro[filtro["Ano"] == int(ano)]
+    filtro=filtro[filtro["Regiao"] == regiao]
+    filtro=filtro[filtro["Natureza"] == indicador]
+
+    if data_inicio:
+        filtro=filtro[pd.to_datetime(filtro["Data"],format="%d-%m-%Y") >= pd.to_datetime(data_inicio)]
+
+    if data_fim:
+        filtro=filtro[pd.to_datetime(filtro["Data"],format="%d-%m-%Y") <= pd.to_datetime(data_fim)]
+
+    if formato=="CSV":
+        filtro.to_csv(f"regiao_csv_{ano}_{indicador}.csv",index=False)
+        return send_file(f"regiao_csv_{ano}_{indicador}.csv",as_attachment=True)
+
+    if formato=="JSON":
+        filtro.to_json(f"ceara_json_{ano}_{indicador}.json", orient="records",indent=4,force_ascii=False)
+        return send_file(f"regiao_json_{ano}_{indicador}.json", as_attachment=True)
+    
+    if formato=="Planilha(.xlsx)":
+        filtro.to_excel(f"regiao_planilha_{ano}_{indicador}.xlsx",index=False)
+        return send_file(f"regiao_planilha_{ano}_{indicador}.xlsx", as_attachment=True)
+
+    return
+
+# FORMULÁRIO CEARÁ
+@app.route("/API/CEARA")
+def API_CEARA():
+    # RECEBE PARAMETROS DO FORMULÁRIO DO ESTADO
+    ano = request.form.get('ano_ceara')
+    indicador = request.form.get('indicador_ceara')
+    data_inicio = request.form.get('data_inicio_ceara')
+    data_fim = request.form.get('data_fim_ceara')
+    formato=request.form.get('formato_ceara')
+
+    filtro=df.copy() # PARA NÃO SOBRESCREVER
+
+    if ano:
+        filtro=filtro[filtro["Ano"] == int(ano)]
+    else:
+        return "Preenchimento do ano obrigatório."
+    
+    if indicador:
+        filtro=filtro[filtro["Natureza"] == indicador]
+    else:
+        return "Preenchimento do indicador obrigatório."
+    
+    if data_inicio:
+        filtro=filtro[pd.to_datetime(filtro["Data"],format="%d-%m-%Y") >= pd.to_datetime(data_inicio)]
+
+    if data_fim:
+        filtro=filtro[pd.to_datetime(filtro["Data"],format="%d-%m-%Y") <= pd.to_datetime(data_fim)]
+
+    if formato=="CSV":
+        filtro.to_csv(f"ceara_csv_{ano}_{indicador}.csv",index=False)
+        return send_file(f"ceara_csv_{ano}_{indicador}.csv",as_attachment=True)
+
+    if formato=="JSON":
+        filtro.to_json(f"ceara_json_{ano}_{indicador}.json", orient="records",indent=4,force_ascii=False)
+        return send_file(f"ceara_json_{ano}_{indicador}.json", as_attachment=True)
+    
+    if formato=="Planilha(.xlsx)":
+        filtro.to_excel(f"ceara_planilha_{ano}_{indicador}.xlsx",index=False)
+        return send_file(f"ceara_planilha_{ano}_{indicador}.xlsx", as_attachment=True)
+
+    return 
+
+# FORMULÁRIO MUNICIPIO
 @app.route("/API/PESQUISA",methods=["POST"])
 def PESQUISA():
     # RECEBE PARAMETROS DO FORMULARIO HTML
@@ -37,7 +121,7 @@ def PESQUISA():
     data_fim = request.form.get('data_fim')
     formato=request.form.get('formato')
 
-    if not municipio or not indicador:
+    if not municipio or not indicador or not formato:
         return jsonify({'erro': 'Campos obrigatórios não preenchidos.'})
     
     # CRITÉRIOS DE PESQUISA
@@ -45,11 +129,9 @@ def PESQUISA():
 
     # CONDICIONAIS PARA ACESSAR O CÓDIGO
 
-    if municipio:
-        filtro=filtro[filtro["Município"]==municipio.capitalize()]
-
-    if indicador:
-        filtro=filtro[filtro["Natureza"]==indicador]
+    
+    filtro=filtro[filtro["Município"]==municipio.capitalize()]
+    filtro=filtro[filtro["Natureza"]==indicador]
 
     if ano:
         filtro=filtro[filtro["Ano"]==int(ano)]
@@ -60,21 +142,24 @@ def PESQUISA():
     if data_fim:
         filtro=filtro[pd.to_datetime(filtro["Data"],format="%d-%m-%Y") <= pd.to_datetime(data_fim)]
 
+    if len(filtro)<1:
+        return "Ahh :( Não há dados com o filtro escolhido"
+
     # BAIXA RESULTADO DE ACORDO COM O FORMATO ESCOLHIDO
         
     if formato=="CSV":
-        filtro.to_csv(f"resultado_csv_{municipio}_{indicador}.csv",index=False)
-        return send_file(f"resultado_csv_{municipio}_{indicador}.csv",as_attachment=True)
+        filtro.to_csv(f"{municipio}_csv_{indicador}.csv",index=False)
+        return send_file(f"{municipio}_csv_{indicador}.csv",as_attachment=True)
 
     if formato=="JSON":
-        filtro.to_json(f"resultado_json_{municipio}_{indicador}.json", orient="records",indent=4,force_ascii=False)
-        return send_file(f"resultado_json_{municipio}_{indicador}.json", as_attachment=True)
+        filtro.to_json(f"{municipio}_json_{indicador}.json", orient="records",indent=4,force_ascii=False)
+        return send_file(f"{municipio}_json_{indicador}.json", as_attachment=True)
     
-    if formato=="(.xlsx)":
-        filtro.to_excel(f"resultado_planilha_{municipio}_{indicador}.xlsx",index=False)
-        return send_file(f"resultado_planilha_{municipio}_{indicador}.xlsx", as_attachment=True)
+    if formato=="Planilha(.xlsx)":
+        filtro.to_excel(f"{municipio}_planilha_{indicador}.xlsx",index=False)
+        return send_file(f"{municipio}_planilha_{indicador}.xlsx", as_attachment=True)
     
-    return "Sucesso! Verifique a caixa de download do seu dispositivo"
+    return 
 
 #######################################################################################################################
 
