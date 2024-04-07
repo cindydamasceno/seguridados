@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Pesquisa</title>
+</head>
+<body>
+    <h2>Formulário de Pesquisa – Município</h2>
+    <form action="/API/PESQUISA" method="post">
+        <label for="ano">Ano:</label>
+        <input type="text" id="ano" name="ano"><br><br>
+        <label for="municipio">Município:</label>
+        <select name="municipio" id="municipio">
+            <!-- <option value="">BUSQUE O MUNICÍPIO</option> -->
+            {% for municipio in municipios %}
+            <option value="{{ municipio }}">{{ municipio }}</option>
+            {% endfor %}
+        </select>
+        <label for="indicador">Indicador:</label>
+        <select name="indicador" id="indicador">
+            <!-- <option value="">BUSQUE O INDICADOR</option> -->
+            {% for indicador in indicadores %}
+            <option value="{{ indicador }}"> {{ indicador }}</option>
+            {% endfor %}
+        </select>
+        
+        <label for="data_inicio">Data de Início:</label>
+        <input type="date" id="data_inicio" name="data_inicio"><br><br>
+        
+        <label for="data_fim">Data de Fim:</label>
+        <input type="date" id="data_fim" name="data_fim"><br><br>
+        
+        <label for="formato">Formato:</label>
+        <select id="formato" name="formato">
+            <option value="CSV">CSV</option>
+            <option value="JSON">JSON</option>
+            <option value="Planilha(.xlsx)">Planilha(.xlsx)</option>
+        </select><br><br>
+        
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
