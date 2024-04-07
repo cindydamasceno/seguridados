@@ -16,9 +16,9 @@ df=dados_novos_df()
 @app.route("/",methods=["GET"])
 def home():
     indicadores=sorted([indicador for indicador in df["Natureza"].unique()])
-    regiao=sorted([regiao.upper() for regiao in df["Regiao"].unique()])
+    regioes=sorted([regiao.upper() for regiao in df["Regiao"].unique()])
     municipios=sorted([municipio.upper() for municipio in df["Município"].unique()])
-    return render_template("index.html",indicadores=indicadores,regiao=regiao,municipios=municipios)
+    return render_template("index.html",indicadores=indicadores,regioes=regioes,municipios=municipios)
 
 @app.route(f"/{ATUALIZA_URL}",methods=["GET"])
 def agenda_seguridados():
@@ -29,7 +29,7 @@ def agenda_seguridados():
 # FORMULÁRIOS A PARTIR DAQUI
 
 # FORMULÁRIO REGIAO
-@app.route("/API/REGIAO")
+@app.route("/API/REGIAO", methods=["POST"])
 def API_REGIAO():
     # RECEBE PARAMETROS DO FORMULÁRIO DO ESTADO
     ano = request.form.get('ano_regiao')
@@ -69,7 +69,7 @@ def API_REGIAO():
     return
 
 # FORMULÁRIO CEARÁ
-@app.route("/API/CEARA")
+@app.route("/API/CEARA", methods=["POST"])
 def API_CEARA():
     # RECEBE PARAMETROS DO FORMULÁRIO DO ESTADO
     ano = request.form.get('ano_ceara')
@@ -128,7 +128,6 @@ def PESQUISA():
     filtro=dados_novos_df().copy() # CRIA UMA CÓPIA PARA EVITAR CONFLITO
 
     # CONDICIONAIS PARA ACESSAR O CÓDIGO
-
     
     filtro=filtro[filtro["Município"]==municipio.capitalize()]
     filtro=filtro[filtro["Natureza"]==indicador]
@@ -161,9 +160,8 @@ def PESQUISA():
     
     return 
 
-#######################################################################################################################
+################################################## ENDPOINTS PARA REQUISIÇÕES#####################################################################
 
-########## ENDPOINTS PARA REQUISIÇÕES #############
 @app.route("/CEARA",methods=["GET"])
 def CEARA():
     # OCORRÊNCIAS POR ESTADO

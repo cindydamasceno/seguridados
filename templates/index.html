@@ -6,39 +6,155 @@
     <title>Formulário de Pesquisa</title>
 </head>
 <body>
-    <h2>Formulário de Pesquisa – Município</h2>
-    <form action="/API/PESQUISA" method="post">
-        <label for="ano">Ano:</label>
-        <input type="text" id="ano" name="ano"><br><br>
-        <label for="municipio">Município:</label>
-        <select name="municipio" id="municipio">
-            <option value="">BUSQUE O MUNICÍPIO</option>
-            {% for municipio in municipios %}
-            <option value="{{ municipio }}">{{ municipio }}</option>
-            {% endfor %}
-        </select>
-        <label for="indicador">Indicador:</label>
-        <select name="indicador" id="indicador">
-            <option value="">BUSQUE O INDICADOR</option>
-            {% for indicador in indicadores %}
-            <option value="{{ indicador }}"> {{ indicador }}</option>
-            {% endfor %}
-        </select>
-        
-        <label for="data_inicio">Data de Início:</label>
-        <input type="date" id="data_inicio" name="data_inicio"><br><br>
-        
-        <label for="data_fim">Data de Fim:</label>
-        <input type="date" id="data_fim" name="data_fim"><br><br>
-        
-        <label for="formato">Formato:</label>
-        <select id="formato" name="formato">
-            <option value="CSV">CSV</option>
-            <option value="JSON">JSON</option>
-            <option value="Planilha(.xlsx)">Planilha(.xlsx)</option>
-        </select><br><br>
-        
-        <input type="submit" value="Enviar">
-    </form>
+    <!-- ESCOLHER O FORMULÁRIO COM TOGGLE (BOTAO DE ALTERNÂNCIA) -->
+    <div class="escolhe-formulario">
+        <button onclick="mostraFormularioMUN()">Município</button>
+        <button onclick="mostraFormularioREG()">Região Administrativa</button>
+        <button onclick="mostraFormularioCE()">Ceará</button>
+    </div>
+
+    <div class="formulario-municipio" id="formulario-municipio">
+        <h2>Formulário de Pesquisa – Município</h2>
+        <form action="/API/PESQUISA" method="post">
+            <div class="formulario-ano">
+                <label for="ano">Ano:</label>
+                <input type="text" id="ano" name="ano"><br><br>
+            </div>
+            <div class="formulario-municipio">
+                <label for="municipio">Município:</label>
+                <select name="municipio" id="municipio">
+                    <option value="">BUSQUE O MUNICÍPIO</option>
+                    {% for municipio in municipios %}
+                    <option value="{{ municipio }}">{{ municipio }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+            <div class="formulario-indicador">
+                <label for="indicador">Indicador:</label>
+                <select name="indicador" id="indicador">
+                    <option value="">BUSQUE O INDICADOR</option>
+                    {% for indicador in indicadores %}
+                    <option value="{{ indicador }}"> {{ indicador }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+            <div class="formulario-data">
+                <label for="data_inicio">Data de Início:</label>
+                <input type="date" id="data_inicio" name="data_inicio"><br><br>
+                <label for="data_fim">Data de Fim:</label>
+                <input type="date" id="data_fim" name="data_fim"><br><br>
+            </div>
+            <div class="fomulario-formato">
+                <label for="formato">Formato:</label>
+                <select id="formato" name="formato">
+                    <option value="CSV">CSV</option>
+                    <option value="JSON">JSON</option>
+                    <option value="Planilha(.xlsx)">Planilha(.xlsx)</option>
+                </select><br><br>
+            </div>
+            <button class="botao-enviar" type="submit"> ENVIAR </button>
+        </form>
+    </div>
+    <div class="formulario-ceara" id="formulario-ceara" style="display: none;">
+        <h2>Formulário de Pesquisa – Ceará</h2>
+        <form action="/API/CEARA" method="post">
+            <div class="formulario-ano">
+                <label for="ano">Ano:</label>
+                <input type="text" id="ano_ceara" name="ano_ceara"><br><br>
+            </div>
+            <br>
+            <div class="formulario-indicador">
+                <label for="indicador">Indicador:</label>
+                <select name="indicador_ceara" id="indicador_ceara">
+                    <option value="">BUSQUE O INDICADOR</option>
+                    {% for indicador in indicadores %}
+                    <option value="{{ indicador }}"> {{ indicador }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+            <div class="formulario-data">
+                <label for="data_inicio">Data de Início:</label>
+                <input type="date" id="data_inicio_ceara" name="data_inicio_ceara"><br><br>
+                <label for="data_fim">Data de Fim:</label>
+                <input type="date" id="data_fim_ceara" name="data_fim_ceara"><br><br>
+            </div>
+            <div class="fomulario-formato">
+                <label for="formato">Formato:</label>
+                <select id="formato_ceara" name="formato_ceara">
+                    <option value="CSV">CSV</option>
+                    <option value="JSON">JSON</option>
+                    <option value="Planilha(.xlsx)">Planilha(.xlsx)</option>
+                </select><br><br>
+            </div>
+            <button class="botao-enviar" type="submit"> ENVIAR </button>
+        </form>
+    </div>
+    <div class="formulario-regiao" id="formulario-regiao" style="display: none;">
+        <h2>Formulário de Pesquisa – Regiao</h2>
+        <form action="/API/REGIAO" method="post">
+            <div class="formulario-ano">
+                <label for="ano">Ano:</label>
+                <input type="text" id="ano_regiao" name="ano_regiao"><br><br>
+            </div>
+            <br>
+            <div class="formulario-regiao">
+                <label for="indicador">Região:</label>
+                <select name="regiao-regiao">
+                    <option value="">BUSQUE A REGIÃO</option>
+                    {% for regiao in regioes %}
+                    <option value="{{ regiao }}">{{ regiao }}</option>
+                    {% endfor %}
+                </select>
+
+            </div>
+            <div class="formulario-indicador">
+                <label for="indicador">Indicador:</label>
+                <select name="indicador_regiao" id="indicador_regiao">
+                    <option value="">BUSQUE O INDICADOR</option>
+                    {% for indicador in indicadores %}
+                    <option value="{{ indicador }}"> {{ indicador }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+            <div class="formulario-data">
+                <label for="data_inicio">Data de Início:</label>
+                <input type="date" id="data_inicio_regiao" name="data_inicio_regiao"><br><br>
+                <label for="data_fim">Data de Fim:</label>
+                <input type="date" id="data_fim_regiao" name="data_fim_regiao"><br><br>
+            </div>
+            <div class="fomulario-formato">
+                <label for="formato">Formato:</label>
+                <select id="formato_regiao" name="formato_regiao">
+                    <option value="CSV">CSV</option>
+                    <option value="JSON">JSON</option>
+                    <option value="Planilha(.xlsx)">Planilha(.xlsx)</option>
+                </select><br><br>
+            </div>
+            <button class="botao-enviar" type="submit"> ENVIAR </button>
+        </form>
+    </div>
+    <script>
+        function mostraFormularioMUN(){
+            document.getElementById("formulario-municipio").style.display="block";
+            document.getElementById("formulario-ceara").style.display="none";
+            document.getElementById("formulario-regiao").style.display="none";
+        }
+
+        function mostraFormularioCE(){
+            document.getElementById("formulario-municipio").style.display="none";
+            document.getElementById("formulario-ceara").style.display="block";
+            document.getElementById("formulario-regiao").style.display="none";
+        }
+
+        function mostraFormularioREG(){
+            document.getElementById("formulario-municipio").style.display="none";
+            document.getElementById("formulario-ceara").style.display="none";
+            document.getElementById("formulario-regiao").style.display="block";
+        }
+    </script>
 </body>
 </html>
