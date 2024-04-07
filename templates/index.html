@@ -18,11 +18,11 @@
         <form action="/API/PESQUISA" method="post">
             <div class="formulario-ano">
                 <label for="ano">Ano:</label>
-                <input type="text" id="ano" name="ano"><br><br>
+                <input type="text" id="ano" name="ano">
             </div>
             <div class="formulario-municipio">
                 <label for="municipio">Município:</label>
-                <select name="municipio" id="municipio">
+                <select name="municipio" id="municipio" required>
                     <option value="">BUSQUE O MUNICÍPIO</option>
                     {% for municipio in municipios %}
                     <option value="{{ municipio }}">{{ municipio }}</option>
@@ -32,7 +32,7 @@
             <br>
             <div class="formulario-indicador">
                 <label for="indicador">Indicador:</label>
-                <select name="indicador" id="indicador">
+                <select name="indicador" id="indicador" required>
                     <option value="">BUSQUE O INDICADOR</option>
                     {% for indicador in indicadores %}
                     <option value="{{ indicador }}"> {{ indicador }}</option>
@@ -42,9 +42,9 @@
             <br>
             <div class="formulario-data">
                 <label for="data_inicio">Data de Início:</label>
-                <input type="date" id="data_inicio" name="data_inicio"><br><br>
+                <input type="date" id="data_inicio" name="data_inicio" value="2009-01-01" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
                 <label for="data_fim">Data de Fim:</label>
-                <input type="date" id="data_fim" name="data_fim"><br><br>
+                <input type="date" id="data_fim" name="data_fim" value="{{ data_max.strftime('%Y-%m-%d') }}" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
             </div>
             <div class="fomulario-formato">
                 <label for="formato">Formato:</label>
@@ -62,12 +62,12 @@
         <form action="/API/CEARA" method="post">
             <div class="formulario-ano">
                 <label for="ano">Ano:</label>
-                <input type="text" id="ano_ceara" name="ano_ceara"><br><br>
+                <input type="text" id="ano_ceara" name="ano_ceara">
             </div>
             <br>
             <div class="formulario-indicador">
                 <label for="indicador">Indicador:</label>
-                <select name="indicador_ceara" id="indicador_ceara">
+                <select name="indicador_ceara" id="indicador_ceara" required>
                     <option value="">BUSQUE O INDICADOR</option>
                     {% for indicador in indicadores %}
                     <option value="{{ indicador }}"> {{ indicador }}</option>
@@ -77,9 +77,9 @@
             <br>
             <div class="formulario-data">
                 <label for="data_inicio">Data de Início:</label>
-                <input type="date" id="data_inicio_ceara" name="data_inicio_ceara"><br><br>
+                <input type="date" id="data_inicio" name="data_inicio" value="2009-01-01" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
                 <label for="data_fim">Data de Fim:</label>
-                <input type="date" id="data_fim_ceara" name="data_fim_ceara"><br><br>
+                <input type="date" id="data_fim" name="data_fim" value="{{ data_max.strftime('%Y-%m-%d') }}" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
             </div>
             <div class="fomulario-formato">
                 <label for="formato">Formato:</label>
@@ -97,22 +97,20 @@
         <form action="/API/REGIAO" method="post">
             <div class="formulario-ano">
                 <label for="ano">Ano:</label>
-                <input type="text" id="ano_regiao" name="ano_regiao"><br><br>
+                <input type="text" id="ano_regiao" name="ano_regiao"><br>
             </div>
-            <br>
             <div class="formulario-regiao">
-                <label for="indicador">Região:</label>
-                <select name="regiao-regiao">
+                <label for="regiao_regiao">Região:</label>
+                <select name="regiao_regiao" id="regiao_regiao" required>
                     <option value="">BUSQUE A REGIÃO</option>
                     {% for regiao in regioes %}
                     <option value="{{ regiao }}">{{ regiao }}</option>
                     {% endfor %}
                 </select>
-
             </div>
             <div class="formulario-indicador">
-                <label for="indicador">Indicador:</label>
-                <select name="indicador_regiao" id="indicador_regiao">
+                <label for="indicador_regiao">Indicador:</label>
+                <select name="indicador_regiao" id="indicador_regiao" required>
                     <option value="">BUSQUE O INDICADOR</option>
                     {% for indicador in indicadores %}
                     <option value="{{ indicador }}"> {{ indicador }}</option>
@@ -122,9 +120,9 @@
             <br>
             <div class="formulario-data">
                 <label for="data_inicio">Data de Início:</label>
-                <input type="date" id="data_inicio_regiao" name="data_inicio_regiao"><br><br>
+                <input type="date" id="data_inicio" name="data_inicio" value="2009-01-01" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
                 <label for="data_fim">Data de Fim:</label>
-                <input type="date" id="data_fim_regiao" name="data_fim_regiao"><br><br>
+                <input type="date" id="data_fim" name="data_fim" value="{{ data_max.strftime('%Y-%m-%d') }}" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
             </div>
             <div class="fomulario-formato">
                 <label for="formato">Formato:</label>

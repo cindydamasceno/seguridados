@@ -16,9 +16,10 @@ df=dados_novos_df()
 @app.route("/",methods=["GET"])
 def home():
     indicadores=sorted([indicador for indicador in df["Natureza"].unique()])
-    regioes=sorted([regiao.upper() for regiao in df["Regiao"].unique()])
-    municipios=sorted([municipio.upper() for municipio in df["Município"].unique()])
-    return render_template("index.html",indicadores=indicadores,regioes=regioes,municipios=municipios)
+    regioes=sorted([regiao for regiao in df["Regiao"].unique()])
+    municipios=sorted([municipio for municipio in df["Município"].unique()])
+    data_max=pd.to_datetime(df["Data"].iloc[-1],format="%d-%m-%Y")
+    return render_template("index.html",indicadores=indicadores,regioes=regioes,municipios=municipios,data_max=data_max)
 
 @app.route(f"/{ATUALIZA_URL}",methods=["GET"])
 def agenda_seguridados():
@@ -33,7 +34,7 @@ def agenda_seguridados():
 def API_REGIAO():
     # RECEBE PARAMETROS DO FORMULÁRIO DO ESTADO
     ano = request.form.get('ano_regiao')
-    regiao = request.form.get('ano_regiao')
+    regiao = request.form.get('regiao_regiao')
     indicador = request.form.get('indicador_regiao')
     data_inicio = request.form.get('data_inicio_regiao')
     data_fim = request.form.get('data_fim_regiao')
@@ -41,12 +42,14 @@ def API_REGIAO():
 
     filtro=df.copy() # PARA NÃO SOBRESCREVER
 
-    if not regiao or not ano or not indicador:
-        return "Obrigatório preenchimento de ano, região e do indicador criminal"
+    if not regiao or not indicador:
+        return "Obrigatório preenchimento de região e indicador criminal"
     
-    filtro=filtro[filtro["Ano"] == int(ano)]
-    filtro=filtro[filtro["Regiao"] == regiao]
+    filtro=filtro[filtro["Regiao"] == regiao] # ADICIONA OS CAPITULARES
     filtro=filtro[filtro["Natureza"] == indicador]
+
+    if ano:
+        filtro=filtro[filtro["Ano"] == int(ano)]
 
     if data_inicio:
         filtro=filtro[pd.to_datetime(filtro["Data"],format="%d-%m-%Y") >= pd.to_datetime(data_inicio)]
@@ -55,16 +58,16 @@ def API_REGIAO():
         filtro=filtro[pd.to_datetime(filtro["Data"],format="%d-%m-%Y") <= pd.to_datetime(data_fim)]
 
     if formato=="CSV":
-        filtro.to_csv(f"regiao_csv_{ano}_{indicador}.csv",index=False)
-        return send_file(f"regiao_csv_{ano}_{indicador}.csv",as_attachment=True)
+        filtro.to_csv(f"{regiao}_CSV_{ano}_{indicador}.csv",index=False)
+        return send_file(f"{regiao}_CSV_{ano}_{indicador}.csv",as_attachment=True)
 
     if formato=="JSON":
-        filtro.to_json(f"ceara_json_{ano}_{indicador}.json", orient="records",indent=4,force_ascii=False)
-        return send_file(f"regiao_json_{ano}_{indicador}.json", as_attachment=True)
+        filtro.to_json(f"{regiao}_JSON_{ano}_{indicador}.json", orient="records",indent=4,force_ascii=False)
+        return send_file(f"{regiao}_JSON_{ano}_{indicador}.json", as_attachment=True)
     
     if formato=="Planilha(.xlsx)":
-        filtro.to_excel(f"regiao_planilha_{ano}_{indicador}.xlsx",index=False)
-        return send_file(f"regiao_planilha_{ano}_{indicador}.xlsx", as_attachment=True)
+        filtro.to_excel(f"{regiao}_PLANILHA_{ano}_{indicador}.xlsx",index=False)
+        return send_file(f"{regiao}_PLANILHA_{ano}_{indicador}.xlsx", as_attachment=True)
 
     return
 
@@ -82,8 +85,6 @@ def API_CEARA():
 
     if ano:
         filtro=filtro[filtro["Ano"] == int(ano)]
-    else:
-        return "Preenchimento do ano obrigatório."
     
     if indicador:
         filtro=filtro[filtro["Natureza"] == indicador]
