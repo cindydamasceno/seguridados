@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* HOME */
 
 html, body {
@@ -36,7 +38,18 @@ html, body {
     cursor: pointer;
 }
 
-/* FORMULÁRIO */
+.escolhe-formulario button:focus {
+    width: 100px;
+    background-color: #19778f;
+    border-radius: 100px;
+    color: #fff;
+    font-weight: 900;
+    padding: 15px 15px;
+    text-transform: uppercase;
+    border-width: 0;
+    margin-right: 1%;
+    cursor: pointer;
+}
 
 /* BOTAO ENVIO DE FORMULÁRIO */
 
@@ -52,6 +65,7 @@ html, body {
     border-width: 0;
     display: block;
     margin: auto;
+    margin-bottom: 2%;
     
 
 }
@@ -69,4 +83,54 @@ html, body {
     cursor: pointer;
     display: block;
     margin: auto;
+    margin-bottom: 2%;
+
+}
+
+/* PREENCHIMENTO FORMULÁRIO */
+
+form{
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-radius: 30px;
+}
+
+select, input{
+    margin-bottom: 15px;
+    border: 2px solid #f1f1f1;
+    width: 250px;
+    /* border-color: #D2D2D2; */
+    border-radius: 30px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    text-align: center;
+    /* AQUI, CUSTOMIZA A SETINHA DO MENU TÁ LIGADO */
+    appearance: none ;
+    font-family: "Raleway",sans-serif;
+    
+}
+
+.nome-formulario{
+    font-family: "Raleway",sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.label-formulario{
+    font-family: "Raleway",sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 15px;
+    text-align: center;
+
+}
+
+.formulario-formato{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

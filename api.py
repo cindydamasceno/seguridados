@@ -19,7 +19,8 @@ def home():
     regioes=sorted([regiao for regiao in df["Regiao"].unique()])
     municipios=sorted([municipio for municipio in df["Município"].unique()])
     data_max=pd.to_datetime(df["Data"].iloc[-1],format="%d-%m-%Y")
-    return render_template("index.html",indicadores=indicadores,regioes=regioes,municipios=municipios,data_max=data_max)
+    anos=sorted([ano for ano in df["Ano"].unique()])
+    return render_template("index.html",anos=anos,indicadores=indicadores,regioes=regioes,municipios=municipios,data_max=data_max)
 
 @app.route(f"/{ATUALIZA_URL}",methods=["GET"])
 def agenda_seguridados():

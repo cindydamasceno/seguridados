@@ -14,124 +14,123 @@
         <button onclick="mostraFormularioCE()">Ceará</button>
     </div>
 
-    <div class="formulario-municipio" id="formulario-municipio">
-        <h2>Formulário de Pesquisa – Município</h2>
+    <div class="formulario" id="formulario-municipio">
         <form action="/API/PESQUISA" method="post">
+            <h2 class="nome-formulario"> Município</h2>
             <div class="formulario-ano">
-                <label for="ano">Ano:</label>
-                <input type="text" id="ano" name="ano">
+                <p class="label-formulario">Escolha o ano</p>
+                <select name="ano" id="ano">
+                    {% for ano in anos %}
+                    <option value="{{ ano }}">{{ ano }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <div class="formulario-municipio">
-                <label for="municipio">Município:</label>
+                <p class="label-formulario">Escolha o município*:</p>
                 <select name="municipio" id="municipio" required>
-                    <option value="">BUSQUE O MUNICÍPIO</option>
                     {% for municipio in municipios %}
                     <option value="{{ municipio }}">{{ municipio }}</option>
                     {% endfor %}
                 </select>
             </div>
-            <br>
             <div class="formulario-indicador">
-                <label for="indicador">Indicador:</label>
+                <p class="label-formulario">Escolha o indicador *</p>
                 <select name="indicador" id="indicador" required>
-                    <option value="">BUSQUE O INDICADOR</option>
                     {% for indicador in indicadores %}
                     <option value="{{ indicador }}"> {{ indicador }}</option>
                     {% endfor %}
                 </select>
             </div>
-            <br>
             <div class="formulario-data">
-                <label for="data_inicio">Data de Início:</label>
-                <input type="date" id="data_inicio" name="data_inicio" value="2009-01-01" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
-                <label for="data_fim">Data de Fim:</label>
+                <p class="label-formulario">Agora, Escolha o intervalo de datas</p>
+                <input type="date" id="data_inicio" name="data_inicio" value="2009-01-01" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}"><br>
                 <input type="date" id="data_fim" name="data_fim" value="{{ data_max.strftime('%Y-%m-%d') }}" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
             </div>
-            <div class="fomulario-formato">
-                <label for="formato">Formato:</label>
+            <div class="formulario-formato">
+                <p class="label-formulario">Qual o formato que deseja a informação?</p>
                 <select id="formato" name="formato">
                     <option value="CSV">CSV</option>
                     <option value="JSON">JSON</option>
                     <option value="Planilha(.xlsx)">Planilha(.xlsx)</option>
-                </select><br><br>
+                </select>
             </div>
             <button class="botao-enviar" type="submit"> ENVIAR </button>
         </form>
     </div>
-    <div class="formulario-ceara" id="formulario-ceara" style="display: none;">
-        <h2>Formulário de Pesquisa – Ceará</h2>
+    <div class="formulario" id="formulario-ceara" style="display: none;">
         <form action="/API/CEARA" method="post">
+            <h2 class="nome-formulario">Ceará</h2>
             <div class="formulario-ano">
-                <label for="ano">Ano:</label>
-                <input type="text" id="ano_ceara" name="ano_ceara">
+                <p class="label-formulario">Escolha o ano</p>
+                <select name="ano" id="ano">
+                    {% for ano in anos %}
+                    <option value="{{ ano }}">{{ ano }}</option>
+                    {% endfor %}
+                </select>
             </div>
-            <br>
             <div class="formulario-indicador">
-                <label for="indicador">Indicador:</label>
-                <select name="indicador_ceara" id="indicador_ceara" required>
-                    <option value="">BUSQUE O INDICADOR</option>
+                <p class="label-formulario">Escolha o indicador</p>
+                <select name="indicador_ceara" id="indicador_ceara" required>               
                     {% for indicador in indicadores %}
                     <option value="{{ indicador }}"> {{ indicador }}</option>
                     {% endfor %}
                 </select>
             </div>
-            <br>
             <div class="formulario-data">
-                <label for="data_inicio">Data de Início:</label>
-                <input type="date" id="data_inicio" name="data_inicio" value="2009-01-01" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
-                <label for="data_fim">Data de Fim:</label>
+                <p class="label-formulario">Agora, escolha o intervalo de datas</p>
+                <input type="date" id="data_inicio" name="data_inicio" value="2009-01-01" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}"><br>
                 <input type="date" id="data_fim" name="data_fim" value="{{ data_max.strftime('%Y-%m-%d') }}" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
             </div>
-            <div class="fomulario-formato">
-                <label for="formato">Formato:</label>
+            <div class="formulario-formato">
+                <p class="label-formulario">Qual o formato que deseja informação?</p>
                 <select id="formato_ceara" name="formato_ceara">
                     <option value="CSV">CSV</option>
                     <option value="JSON">JSON</option>
                     <option value="Planilha(.xlsx)">Planilha(.xlsx)</option>
-                </select><br><br>
+                </select>
             </div>
             <button class="botao-enviar" type="submit"> ENVIAR </button>
         </form>
     </div>
-    <div class="formulario-regiao" id="formulario-regiao" style="display: none;">
-        <h2>Formulário de Pesquisa – Regiao</h2>
+    <div class="formulario" id="formulario-regiao" style="display: none;">
         <form action="/API/REGIAO" method="post">
+            <h2 class="nome-formulario">Formulário de Pesquisa – Regiao</h2>
             <div class="formulario-ano">
-                <label for="ano">Ano:</label>
-                <input type="text" id="ano_regiao" name="ano_regiao"><br>
+                <p class="label-formulario">Escolha o ano</p>
+                <select name="ano" id="ano">
+                    {% for ano in anos %}
+                    <option value="{{ ano }}">{{ ano }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <div class="formulario-regiao">
-                <label for="regiao_regiao">Região:</label>
-                <select name="regiao_regiao" id="regiao_regiao" required>
-                    <option value="">BUSQUE A REGIÃO</option>
+                <p class="label-formulario">Escolha a região administrativa</p>
+                <select name="regiao_regiao" id="regiao_regiao" required>                    
                     {% for regiao in regioes %}
                     <option value="{{ regiao }}">{{ regiao }}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="formulario-indicador">
-                <label for="indicador_regiao">Indicador:</label>
+                <p class="label-formulario">Escolha o indicador</p>
                 <select name="indicador_regiao" id="indicador_regiao" required>
-                    <option value="">BUSQUE O INDICADOR</option>
                     {% for indicador in indicadores %}
                     <option value="{{ indicador }}"> {{ indicador }}</option>
                     {% endfor %}
                 </select>
             </div>
-            <br>
             <div class="formulario-data">
-                <label for="data_inicio">Data de Início:</label>
-                <input type="date" id="data_inicio" name="data_inicio" value="2009-01-01" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
-                <label for="data_fim">Data de Fim:</label>
+                <p class="label-formulario">Agora, escolha o intervalo de datas</p>
+                <input type="date" id="data_inicio" name="data_inicio" value="2009-01-01" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}"><br>
                 <input type="date" id="data_fim" name="data_fim" value="{{ data_max.strftime('%Y-%m-%d') }}" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
             </div>
-            <div class="fomulario-formato">
-                <label for="formato">Formato:</label>
+            <div class="formulario-formato">
+                <p class="label-formulario">Qual o formato que deseja informação?</p>
                 <select id="formato_regiao" name="formato_regiao">
                     <option value="CSV">CSV</option>
                     <option value="JSON">JSON</option>
                     <option value="Planilha(.xlsx)">Planilha(.xlsx)</option>
-                </select><br><br>
+                </select>
             </div>
             <button class="botao-enviar" type="submit"> ENVIAR </button>
         </form>
