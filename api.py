@@ -13,20 +13,25 @@ ATUALIZA_URL=os.getenv("ATUALIZA_URL")
 ## ACESSO AO BANCO DE DADOS NOVOS
 df=dados_novos_df()
 
+# VARIAVEL GLOVAL PARA PEGAR RASPADOR
+data_raspagem=None
+
 @app.route("/",methods=["GET"])
 def home():
+    global data_raspagem
     indicadores=sorted([indicador for indicador in df["Natureza"].unique()])
     regioes=sorted([regiao for regiao in df["Regiao"].unique()])
     municipios=sorted([municipio for municipio in df["Município"].unique()])
     data_max=pd.to_datetime(df["Data"].iloc[-1],format="%d-%m-%Y")
     anos=sorted([ano for ano in df["Ano"].unique()])
-    return render_template("index.html",anos=anos,indicadores=indicadores,regioes=regioes,municipios=municipios,data_max=data_max)
+    return render_template("index.html",data_raspagem=data_raspagem,anos=anos,indicadores=indicadores,regioes=regioes,municipios=municipios,data_max=data_max)
 
 @app.route(f"/{ATUALIZA_URL}",methods=["GET"])
 def agenda_seguridados():
-    data=datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=-3))).strftime("%d-%m-%Y-%Hh%M")
+    global data_raspagem
+    data_raspagem=datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=-3))).strftime("%d-%m-%Y-%Hh%M")
     atualiza_seguridados()
-    return f"Informações atualizadas em {data}"
+    return f"Informações atualizadas em {data_raspagem}"
 
 # FORMULÁRIOS A PARTIR DAQUI
 

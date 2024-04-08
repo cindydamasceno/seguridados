@@ -27,6 +27,7 @@
                     <img src="{{ url_for('static', filename='img/seguridados-logo.png') }}">
                     <!-- <p class="texto-topico"> DADOS DE SEGURANÇA NA PONTA DO MOUSE</p> -->
                     <p><span style="text-transform: uppercase; font-family: 'Courier New', Courier, monospace; font-size: 21px;font-weight: 400;display: flex; margin-left: 20%;margin-right: 20%;justify-content: center"><strong>Preencha para baixar</strong>&nbsp;dados de CVLI no Ceará</span></p>
+                    <p><span style="text-transform: uppercase; font-family: 'Courier New', Courier, monospace; font-size: 21px;font-weight: 400;display: flex; margin-left: 20%;margin-right: 20%;justify-content: center">Última atualização: {{ data_raspagem }}/ Dados até {{ data_max.strftime('%d/%m/%Y') }} </span></p>
                 </div>
                 <div class="caixa-formulario" id="formulario">
                     <!-- ESCOLHER O FORMULÁRIO COM TOGGLE (BOTAO DE ALTERNÂNCIA) -->
