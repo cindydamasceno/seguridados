@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kameron:wght@400..700&family=Slabo+13px&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight:wght@400;700&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 /* HOME E CAIXAS DE DIVISAO */
 
 html, body {
@@ -14,7 +12,7 @@ html, body {
 }
 
 .cabecalho{
-    background-color: #76C893;
+    background-color: #99D98C;
     display: flex;
     left: 0;
     position: sticky;
@@ -37,34 +35,26 @@ html, body {
     flex: 20%;
     background-color: #f1f1f1;
     padding: 1%;
+    z-index: 2;
 }
 
 .caixa-direita {
     height: 100%;
     flex: 80%;
     padding: 1%;
+    /* z-index: 3; */
+    position: relative;
     /* background-color: #f1f1f1; */
 }
 
 
-.sobre-ferramenta {
-    height: 100%;
+.sobre-ferramenta, .sobre-api, .sobre-metodologia {
+    position: relative;
+    /* height: 100%; */
     flex: 80%;
     padding: 1%;
-    /* background-color: #f1f1f1; */
-}
-
-.sobre-api {
-    height: 100%;
-    flex: 80%;
-    padding: 1%;
-    /* background-color: #f1f1f1; */
-}
-
-.sobre-metodologia {
-    height: 100%;
-    flex: 80%;
-    padding: 1%;
+    z-index: 1;
+    margin-bottom: 0;
     /* background-color: #f1f1f1; */
 }
 
@@ -78,39 +68,45 @@ html, body {
 
 .escolhe-formulario button {
     width: 100px;
-    background-color: #8ECAE6;
-    border-radius: 100px;
-    color: #fff;
+    background-color: transparent;
+    font-size: 16px;
+    color: #000;
     font-weight: 900;
-    padding: 15px 15px;
+    padding: 15px 0;
     text-transform: uppercase;
-    border-width: 0;
+    border: none;
+    border-width: 3px;
     margin-right: 1%;
+    border-bottom: 5px solid #99D98C;
 }
 
 .escolhe-formulario button:hover {
     width: 100px;
-    background-color: #219EBC;
-    border-radius: 100px;
-    color: #fff;
+    background-color: transparent;
+    font-size: 16px;
+    color: #000;
     font-weight: 900;
-    padding: 15px 15px;
+    padding: 15px 0;
     text-transform: uppercase;
-    border-width: 0;
+    border: none;
+    border-width: 3px;
     margin-right: 1%;
+    border-bottom: 5px solid #B5E48C;
     cursor: pointer;
 }
 
 .escolhe-formulario button:focus {
     width: 100px;
-    background-color: #19778f;
-    border-radius: 100px;
-    color: #fff;
+    background-color: transparent;
+    font-size: 16px;
+    color: #000;
     font-weight: 900;
-    padding: 15px 15px;
+    padding: 15px 0;
     text-transform: uppercase;
-    border-width: 0;
+    border: none;
+    border-width: 3px;
     margin-right: 1%;
+    border-bottom: 5px solid #76C893;
     cursor: pointer;
 }
 
@@ -135,7 +131,6 @@ html, body {
     margin-top: 1%;
     width: 100px;
     background-color: #B5E48C;
-    border-radius: 50px;
     color: #000;
     font-weight: 900;
     padding: 15px 15px;
@@ -144,15 +139,12 @@ html, body {
     display: block;
     margin: auto;
     margin-bottom: 2%;
-    
-
 }
 
 .botao-enviar:hover{
     margin-top: 1%;
     width: 100px;
     background-color: #76C893;
-    border-radius: 50px;
     color: #000;
     font-weight: 900;
     padding: 15px 15px;
@@ -174,40 +166,38 @@ form{
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: #f1f1f1; */
     border-radius: 20px;
     border-color: #f1f1f1;
-    border-style: dotted;
 }
 
 select, input{
     margin-bottom: 5%;
     border: 2px solid #f1f1f1;
-    width: 250px;
+    width: 250px !important;
     /* border-color: #D2D2D2; */
-    border-radius: 30px;
-    padding: 10px 20px;
+    /* border-radius: 30px; */
+    padding: 10px 10px;
     text-transform: uppercase;
     text-align: center;
     /* AQUI, CUSTOMIZA A SETINHA DO MENU TÁ LIGADO */
     appearance: none ;
-    font-family: "Raleway",sans-serif;
+    font-family: "Zilla Slab",serif;
     
 }
 
 .nome-formulario{
-    font-family: "Raleway",sans-serif;
+    font-family: "Zilla Slab",serif;
     font-weight: bold;
     text-transform: uppercase;
     font-size: 20px;
 }
 
 .label-formulario{
-    font-family: "Raleway",sans-serif;
+    font-family: "Zilla Slab",serif;
     font-weight: 600;
     text-transform: uppercase;
     font-size: 12px;
-    text-align: center;
+    text-align: left;
     margin-bottom: 3px;
 
 }
@@ -227,27 +217,59 @@ select, input{
     margin-bottom: 2%;
 }
 
-.topico-cabecalho{
-    font-family: "Open Sans",sans-serif;
+.texto-topico{
+    font-family: "Zilla Slab Highlight",serif;
     font-size: 21px;
     font-weight: 800;
     line-height: 30px;
     display: flex;
     margin-left: 20%;
     margin-right: 20%;
-    /* justify-content: center; */
     text-align: left;
+    text-transform: uppercase;
+    color: #99D98C;
 }
-.texto-cabecalho{
-    font-family: "Open Sans",sans-serif;
+.texto-conteudo{
+    font-family: "Zilla Slab",serif;
     font-size: 21px;
     font-weight: 200;
-    line-height: 30px;
+    line-height: 35px;
     display: flex;
     margin-left: 20%;
     margin-right: 20%;
-    justify-content: center;
+    justify-content: left !important;
 }
 
+table{
+    margin-left: 20%;
+    margin-right: 20%;
+    border: #f1f1f1 solid 1px;
+    padding: 10px 10px;
+    border-collapse: collapse;
+    font-family: 'Courier New', Courier, monospace;
+}
 
+th,td{
+    border-bottom: #f1f1f1 solid 1px;
+    padding: 10px 10px;
+    justify-content: left;
+}
 
+code{
+    background-color: #f4f4f4;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: "Courier New", Courier, monospace;
+    text-align: left !important;
+    margin: 0;
+}
+
+.codigo-api{    
+    background-color: #f4f4f4;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-family: "Courier New", Courier, monospace;
+    margin: 0;
+    margin-left: 20%;
+    margin-right: 20%;
+}

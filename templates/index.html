@@ -18,8 +18,8 @@
             <div class="caixa-direita">
                 <div class="cabecalho-logo">
                     <img src="{{ url_for('static', filename='img/seguridados-logo.png') }}">
-                    <p class="topico-cabecalho"> Lorem ipsum.</p>
-                    <p class="texto-cabecalho"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ligula quis turpis varius volutpat eget a dolor. Nullam et felis metus. Suspendisse non neque bibendum, laoreet sem vel, sollicitudin sapien.</p>
+                    <p class="texto-topico"> Lorem ipsum.</p>
+                    <p class="texto-conteudo"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ligula quis turpis varius volutpat eget a dolor. Nullam et felis metus. Suspendisse non neque bibendum, laoreet sem vel, sollicitudin sapien.</p>
                 </div>
                 <div class="caixa-formulario">
                     <!-- ESCOLHER O FORMULÁRIO COM TOGGLE (BOTAO DE ALTERNÂNCIA) -->
@@ -34,6 +34,7 @@
                             <div class="formulario-municipio">
                                 <p class="label-formulario">Comece escolhendo o município</p>
                                 <select name="municipio" id="municipio" required>
+                                    <option value="">MUNICÍPIO</option>
                                     {% for municipio in municipios %}
                                     <option value="{{ municipio }}">{{ municipio }}</option>
                                     {% endfor %}
@@ -42,6 +43,7 @@
                             <div class="formulario-indicador">
                                 <p class="label-formulario">Em seguida, o indicador criminal</p>
                                 <select name="indicador" id="indicador" required>
+                                    <option value="">INDICADOR</option>
                                     {% for indicador in indicadores %}
                                     <option value="{{ indicador }}"> {{ indicador }}</option>
                                     {% endfor %}
@@ -50,6 +52,7 @@
                             <div class="formulario-ano">
                                 <p class="label-formulario">Você pode escolher o ano</p>
                                 <select name="ano" id="ano">
+                                    <option value="">ANO</option>
                                     {% for ano in anos %}
                                     <option value="{{ ano }}">{{ ano }}</option>
                                     {% endfor %}
@@ -57,50 +60,15 @@
                             </div>
                             <div class="formulario-data">
                                 <p class="label-formulario">Ou, se preferir, um intervalo entre datas</p>
-                                <input type="date" id="data_inicio" name="data_inicio" value="2009-01-01" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}"><br>
-                                <input type="date" id="data_fim" name="data_fim" value="{{ data_max.strftime('%Y-%m-%d') }}" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
+                                <input type="date" id="data_inicio" name="data_inicio" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}"><br>
+                                <input type="date" id="data_fim" name="data_fim" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
                             </div>
                             <div class="formulario-formato">
                                 <p class="label-formulario">Por fim, escolha o formato de arquivo <br>que deseja para receber a informação</p>
                                 <select id="formato" name="formato">
+                                    <option value="Planilha(.xlsx)">Planilha(.xlsx)</option>
                                     <option value="CSV">CSV</option>
                                     <option value="JSON">JSON</option>
-                                    <option value="Planilha(.xlsx)">Planilha(.xlsx)</option>
-                                </select>
-                            </div>
-                            <button class="botao-enviar" type="submit"> ENVIAR </button>
-                        </form>
-                    </div>
-                    <div class="formulario" id="formulario-ceara" style="display: none;">
-                        <form action="/API/CEARA" method="post">
-                            <h2 class="nome-formulario">Ceará</h2>
-                            <div class="formulario-indicador">
-                                <p class="label-formulario">Comece escolhendo o indicador criminal</p>
-                                <select name="indicador_ceara" id="indicador_ceara" required>               
-                                    {% for indicador in indicadores %}
-                                    <option value="{{ indicador }}"> {{ indicador }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="formulario-ano">
-                                <p class="label-formulario">Agora, escolha o ano</p>
-                                <select name="ano" id="ano">
-                                    {% for ano in anos %}
-                                    <option value="{{ ano }}">{{ ano }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="formulario-data">
-                                <p class="label-formulario">Ou, se preferir, escolha um intervalo entre datas</p>
-                                <input type="date" id="data_inicio" name="data_inicio" value="2009-01-01" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}"><br>
-                                <input type="date" id="data_fim" name="data_fim" value="{{ data_max.strftime('%Y-%m-%d') }}" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
-                            </div>
-                            <div class="formulario-formato">
-                                <p class="label-formulario">Por fim, escolha o formato de arquivo <br>que deseja para receber a informação</p>
-                                <select id="formato_ceara" name="formato_ceara">
-                                    <option value="CSV">CSV</option>
-                                    <option value="JSON">JSON</option>
-                                    <option value="Planilha(.xlsx)">Planilha(.xlsx)</option>
                                 </select>
                             </div>
                             <button class="botao-enviar" type="submit"> ENVIAR </button>
@@ -108,10 +76,11 @@
                     </div>
                     <div class="formulario" id="formulario-regiao" style="display: none;">
                         <form action="/API/REGIAO" method="post">
-                            <h2 class="nome-formulario">Formulário de Pesquisa – Regiao</h2>
+                            <h2 class="nome-formulario">Região administrativa</h2>
                             <div class="formulario-regiao">
                                 <p class="label-formulario">Escolha a região administrativa</p>
                                 <select name="regiao_regiao" id="regiao_regiao" required>                    
+                                    <option value="">REGIÃO ADMINISTRATIVA</option>
                                     {% for regiao in regioes %}
                                     <option value="{{ regiao }}">{{ regiao }}</option>
                                     {% endfor %}
@@ -120,14 +89,16 @@
                             <div class="formulario-indicador">
                                 <p class="label-formulario">Em seguida, o indicador criminal</p>
                                 <select name="indicador_regiao" id="indicador_regiao" required>
+                                    <option value="">INDICADOR</option>
                                     {% for indicador in indicadores %}
                                     <option value="{{ indicador }}"> {{ indicador }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                             <div class="formulario-ano">
-                                <p class="label-formulario">Agora, escolha o ano</p>
+                                <p class="label-formulario">Você pode escolher o ano</p>
                                 <select name="ano" id="ano">
+                                    <option value="">ANO</option>
                                     {% for ano in anos %}
                                     <option value="{{ ano }}">{{ ano }}</option>
                                     {% endfor %}
@@ -135,15 +106,52 @@
                             </div>
                             <div class="formulario-data">
                                 <p class="label-formulario">Ou, se preferir, um intervalo entre datas</p>
-                                <input type="date" id="data_inicio" name="data_inicio" value="2009-01-01" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}"><br>
-                                <input type="date" id="data_fim" name="data_fim" value="{{ data_max.strftime('%Y-%m-%d') }}" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
+                                <input type="date" id="data_inicio" name="data_inicio" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}"><br>
+                                <input type="date" id="data_fim" name="data_fim" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
                             </div>
                             <div class="formulario-formato">
                                 <p class="label-formulario">Por fim, escolha o formato de arquivo <br>que deseja para receber a informação</p>
                                 <select id="formato_regiao" name="formato_regiao">
+                                    <option value="Planilha(.xlsx)">Planilha(.xlsx)</option>
                                     <option value="CSV">CSV</option>
                                     <option value="JSON">JSON</option>
+                                </select>
+                            </div>
+                            <button class="botao-enviar" type="submit"> ENVIAR </button>
+                        </form>
+                    </div>
+                    <div class="formulario" id="formulario-ceara" style="display: none;">
+                        <form action="/API/CEARA" method="post">
+                            <h2 class="nome-formulario">Ceará</h2>
+                            <div class="formulario-ceara">
+                                <p class="label-formulario">ESCOLHA O INDICADOR CRIMINAL</p>
+                                <select name="indicador_ceara" id="indicador_ceara" required>
+                                    <option value=""> INDICADOR</option>
+                                    {% for indicador in indicadores %}
+                                    <option value="{{ indicador }}"> {{ indicador }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="formulario-ano">
+                                <p class="label-formulario">Escolha o ano</p>
+                                <select name="ano_ceara" id="ano_ceara">
+                                    <option value="">ANO</option>
+                                    {% for ano in anos %}
+                                    <option value="{{ ano }}">{{ ano }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="formulario-data">
+                                <p class="label-formulario">Ou, se preferir, um intervalo entre datas</p>
+                                <input type="date" id="data_inicio_ceara" name="data_inicio_ceara" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}"><br>
+                                <input type="date" id="data_fim_ceara" name="data_fim_ceara" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
+                            </div>
+                            <div class="formulario-formato">
+                                <p class="label-formulario">Por fim, escolha o formato de arquivo <br>que deseja para receber a informação</p>
+                                <select id="formato_ceara" name="formato_ceara">
                                     <option value="Planilha(.xlsx)">Planilha(.xlsx)</option>
+                                    <option value="CSV">CSV</option>
+                                    <option value="JSON">JSON</option>
                                 </select>
                             </div>
                             <button class="botao-enviar" type="submit"> ENVIAR </button>
@@ -151,16 +159,90 @@
                     </div>
                 </div>
                 <div class="sobre-ferramenta">
-                    <h2>Teste</h2>
+                    <p class="texto-topico"> SOBRE A SEGURIDADOS</p>
+                    <p class="texto-conteudo"> A SEGURIDADOS é uma proposta para ampliar o acesso a dados abertos sobre Crimes Violentos Letais Intencionais (CVLI) no Ceará. Ela tem como base as divulgações mensais da Secretaria da Segurança Pública e Defesa Social do Ceará (SSPDS-CE). Utilizando técnicas de automação, um robô captura todo dia 10 as informações atualizadas dos indicadores FEMINICÍDIO, HOMICÍDIO DOLOSO, LATROCÍNIO e LESÃO CORPORAL SEGUIDO DE MORTE. Estes dados são processados e podem ser acessados no formulário do tópico anterior ou via solicitações API. Esta ferramenta é um protótipo e deve ser lida com cautela.</p>
                 </div>
                 <div class="sobre-api">
-                    <h2>Teste</h2>
+                    <p class="texto-topico"> COMO USAR A API</p>
+                    <div class="tabela">
+                        <p class="texto-conteudo"> A API SEGURIDADOS permite acessar informações de maneira direcionada.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>URL</th>
+                                    <th>MÉTODO DE SOLICITAÇÃO</th>
+                                    <th>APLICAÇÃO</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>/CEARA</code></td>
+                                    <td><code>GET</code</td>
+                                    <td>Retorna os INDICADORES CRIMINAIS por ano em todo o estado</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/REGIAO</code></td>
+                                    <td><code>GET</code></td>
+                                    <td>Retorna os INDICADORES CRIMINAIS por ANO em cada REGIÃO ADMINISTRATIVA</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/REGIAO/{CD}</code></td>
+                                    <td><code>GET</code></td>
+                                    <td>Retorna TODOS OS DADOS por REGIÃO ADMINISTRATIVA. Veja o código de cada região aqui.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/MUNICÍPIO/{CODIGO IBGE}</code></td>
+                                    <td><code>GET</code></td>
+                                    <td>Retorna TODOS OS DADOS de um determinado MUNICÍPIO CEARENSE a partir do código IBGE. Veja o código de cada cidade aqui.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/INDICADOR/{CD}</code></td>
+                                    <td><code>GET</code></td>
+                                    <td>Retorna TODOS OS DADOS de um determinado INDICADOR CRIMINAL a partir de um código. Veja o código de cada indicador aqui.</td>
+                                </tr>
+                                <!-- Adicione mais linhas conforme necessário -->
+                            </tbody>
+                        </table>
+                        <p class="texto-conteudo"> Exemplo de resultados</p>
+                        <div class="codigo-api">
+                            <pre>
+                            # NO ENDPOINT /CEARÁ:
+                             {
+                                "2009": {
+                                  "HOMICIDIO DOLOSO": 2126,
+                                  "LESAO CORPORAL SEGUIDA DE MORTE": 89,
+                                  "ROUBO SEGUIDO DE MORTE (LATROCINIO)": 47
+                                },
+                                "2010": {
+                                  "HOMICIDIO DOLOSO": 2701,
+                                  "LESAO CORPORAL SEGUIDA DE MORTE": 54,
+                                  "ROUBO SEGUIDO DE MORTE (LATROCINIO)": 48
+                                },
+                                "2011": {
+                                  "HOMICIDIO DOLOSO": 2674,
+                                  "LESAO CORPORAL SEGUIDA DE MORTE": 59,
+                                  "ROUBO SEGUIDO DE MORTE (LATROCINIO)": 73
+                                },
+                                "2012": {
+                                  "HOMICIDIO DOLOSO": 3573,
+                                  "LESAO CORPORAL SEGUIDA DE MORTE": 61,
+                                  "ROUBO SEGUIDO DE MORTE (LATROCINIO)": 96
+                                },
+                            }
+
+                            # NO ENDPOINT /REGIAO
+                            
+                        
+                        
+                        </pre>
+                        </div>
+                    </div>
                 </div>
                 <div class="sobre-metodologia">
-                    <h2>Teste</h2>
+                    <p class="texto-topico"> Lorem ipsum.</p>
+                    <p class="texto-conteudo"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ligula quis turpis varius volutpat eget a dolor. Nullam et felis metus. Suspendisse non neque bibendum, laoreet sem vel, sollicitudin sapien.</p>
                 </div>
             </div>
-    </div>
         <script>
             function mostraFormularioMUN(){
                 document.getElementById("formulario-municipio").style.display="block";
@@ -181,6 +263,7 @@
             }
 
         </script>
+        </div>
 
 </body>
 </html>
