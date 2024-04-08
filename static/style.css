@@ -1,12 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kameron:wght@400..700&family=Slabo+13px&display=swap');
 
-/* HOME */
+/* HOME E CAIXAS DE DIVISAO */
 
 html, body {
     margin: 0;
     height: 100%;
-    margin-bottom: 10%;
+}
+
+.fundo-principal{
+    display: flex;
+    height: 100%;
+}
+
+.cabecalho{
+    background-color: #76C893;
+    display: flex;
+    left: 0;
+    position: sticky;
+    right: 0;
+    top: 0;
+    z-index: 4;
+    height: 50px;
+}
+
+.cabecalho img{
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    width: 30px;
+    height: 30px;
+}
+
+.caixa-esquerda {
+    height: 100%;
+    flex: 20%;
+    background-color: #f1f1f1;
+    padding: 1%;
+}
+
+.caixa-direita {
+    height: 100%;
+    flex: 80%;
+    padding: 1%;
+    /* background-color: #f1f1f1; */
+}
+
+
+.sobre-ferramenta {
+    height: 100%;
+    flex: 80%;
+    padding: 1%;
+    /* background-color: #f1f1f1; */
+}
+
+.sobre-api {
+    height: 100%;
+    flex: 80%;
+    padding: 1%;
+    /* background-color: #f1f1f1; */
+}
+
+.sobre-metodologia {
+    height: 100%;
+    flex: 80%;
+    padding: 1%;
+    /* background-color: #f1f1f1; */
 }
 
 .escolhe-formulario{
@@ -159,7 +218,6 @@ select, input{
     align-items: center;
 }
 
-
 .cabecalho-logo img{
     width: 40%;
     height: auto;
@@ -191,16 +249,5 @@ select, input{
     justify-content: center;
 }
 
-.github{
-    position: relative;
-    background-color: #76C893;
-    width: 100%;
-    height: 50px;
-}
-.github img{
-    position: absolute;
-    top: 20%;
-    right: 10%;
-    width: 30px;
-    height: 30px;
-}
+
+
