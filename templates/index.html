@@ -13,15 +13,22 @@
     </div>
     <div class="fundo-principal">
             <div class="caixa-esquerda">
-                <h2>"Este é o texto que estará na caixa da esquerda"</h2>
+                <div class="menu-navegacao" style="margin-top: 5%;">
+                    <a href="#formulario">Formulário</a><br>
+                    <a href="#sobre-ferramenta">Sobre</a><br>
+                    <a href="#sobre-api">API</a><br>
+                    <a href="#exemplos-endpoints">Endpoints</a><br>
+                    <a href="#dicionario-dados">Dicionário de dados</a><br>
+                    <a href="#sobre-metodologia">Contato</a><br>
+                </div>
             </div>
             <div class="caixa-direita">
                 <div class="cabecalho-logo">
                     <img src="{{ url_for('static', filename='img/seguridados-logo.png') }}">
-                    <p class="texto-topico"> Lorem ipsum.</p>
-                    <p class="texto-conteudo"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ligula quis turpis varius volutpat eget a dolor. Nullam et felis metus. Suspendisse non neque bibendum, laoreet sem vel, sollicitudin sapien.</p>
+                    <!-- <p class="texto-topico"> DADOS DE SEGURANÇA NA PONTA DO MOUSE</p> -->
+                    <p><span style="text-transform: uppercase; font-family: 'Courier New', Courier, monospace; font-size: 21px;font-weight: 400;display: flex; margin-left: 20%;margin-right: 20%;justify-content: center"><strong>Preencha para baixar</strong>&nbsp;dados de CVLI no Ceará</span></p>
                 </div>
-                <div class="caixa-formulario">
+                <div class="caixa-formulario" id="formulario">
                     <!-- ESCOLHER O FORMULÁRIO COM TOGGLE (BOTAO DE ALTERNÂNCIA) -->
                     <div class="escolhe-formulario">
                         <button id="btn-mun" onclick="mostraFormularioMUN()">Município</button>
@@ -97,7 +104,7 @@
                             </div>
                             <div class="formulario-ano">
                                 <p class="label-formulario">Você pode escolher o ano</p>
-                                <select name="ano" id="ano">
+                                <select name="ano_regiao" id="ano_regiao">
                                     <option value="">ANO</option>
                                     {% for ano in anos %}
                                     <option value="{{ ano }}">{{ ano }}</option>
@@ -106,8 +113,8 @@
                             </div>
                             <div class="formulario-data">
                                 <p class="label-formulario">Ou, se preferir, um intervalo entre datas</p>
-                                <input type="date" id="data_inicio" name="data_inicio" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}"><br>
-                                <input type="date" id="data_fim" name="data_fim" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
+                                <input type="date" id="data_inicio_regiao" name="data_inicio" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}"><br>
+                                <input type="date" id="data_fim_regiao" name="data_fim" min="2009-01-01" max="{{ data_max.strftime('%Y-%m-%d') }}">
                             </div>
                             <div class="formulario-formato">
                                 <p class="label-formulario">Por fim, escolha o formato de arquivo <br>que deseja para receber a informação</p>
@@ -158,12 +165,13 @@
                         </form>
                     </div>
                 </div>
-                <div class="sobre-ferramenta">
-                    <p class="texto-topico"> SOBRE A SEGURIDADOS</p>
-                    <p class="texto-conteudo"> A SEGURIDADOS é uma proposta para ampliar o acesso a dados abertos sobre Crimes Violentos Letais Intencionais (CVLI) no Ceará. Ela tem como base as <a target="_blank" href="https://www.sspds.ce.gov.br/indicadores-de-seguranca-publica/">divulgações mensais da Secretaria da Segurança Pública e Defesa Social do Estado do Ceará (SSPDS-CE)</a>. Utilizando técnicas de automação, um robô captura todo dia 10 as informações atualizadas dos indicadores FEMINICÍDIO, HOMICÍDIO DOLOSO, LATROCÍNIO e LESÃO CORPORAL SEGUIDO DE MORTE. Estes dados são processados e podem ser acessados no formulário do tópico anterior ou via solicitações API. Esta ferramenta é um protótipo e deve ser lida com cautela.</p>
+                <div class="sobre-ferramenta" id="sobre-ferramenta">
+                    <p class="texto-topico"><a href="#sobre-ferramenta">SOBRE A SEGURIDADOS</a></p>
+                    <p class="texto-conteudo"> A SEGURIDADOS é uma proposta para ampliar o acesso a dados abertos sobre Crimes Violentos Letais Intencionais (CVLI) no Ceará. Este protótpio tem como base as <strong><a target="_blank" href="https://www.sspds.ce.gov.br/indicadores-de-seguranca-publica/">divulgações mensais da Secretaria da Segurança Pública e Defesa Social do Estado do Ceará (SSPDS-CE)</strong></a>. <br><br>Utilizando técnicas de automação, um robô captura todo dia 10 as informações atualizadas dos indicadores <span style="border-bottom: #76C893 solid 3px; font-weight: 800; color: #76C893;">FEMINICÍDIO, HOMICÍDIO DOLOSO, LATROCÍNIO e LESÃO CORPORAL SEGUIDO DE MORTE</span>. Estes dados são processados e podem ser acessados no formulário do tópico anterior ou via solicitações API. 
+                        <br><br><span style="font-weight: bolder; font-family: 'Courier New', Courier, monospace;">ATENÇÃO: ESTA FERRAMENTA É UM PROTÓTIPO E DEVE SER LIDA COM CAUTELA. ENTRE EM CONTATO COM A RESPONSÁVEL AO ENCONTRAR DIVERGÊNCIAS</strong> </p>
                 </div>
-                <div class="sobre-api">
-                    <p class="texto-topico"> COMO USAR A API</p>
+                <div class="sobre-api" id="#sobre-api">
+                    <p class="texto-topico"><a href="#sobre-api">COMO USAR A API</a></p>
                     <div class="tabela">
                         <p class="texto-conteudo"> A API SEGURIDADOS permite acessar informações de maneira direcionada.</p>
                         <table>
@@ -203,7 +211,7 @@
                                 <!-- Adicione mais linhas conforme necessário -->
                             </tbody>
                         </table>
-                        <p class="texto-conteudo"><strong>Exemplo de resultados</strong></p>
+                        <p class="texto-conteudo" id="exemplos-endpoints"><strong><a href="#exemplos-endpoints">Exemplo de resultados</a></strong></p>
                         <div class="codigo-api">
                             <pre>
                             # NO ENDPOINT /CEARÁ:
@@ -311,7 +319,7 @@
                               }
                         </pre>
                         </div>
-                        <p class="texto-conteudo"><strong>Dicionário de dados:</strong></p>
+                        <p class="texto-conteudo" id="dicionario-dados"><strong><a href="#dicionario-dados">Dicionário de dados</a></strong></p>
                         <table>
                             <thead>
                                 <tr>
@@ -423,9 +431,9 @@
                         </table>
                     </div>
                 </div>
-                <div class="sobre-metodologia">
-                    <p class="texto-topico"> POR TRÁS DOS DADOS</p>
-                    <p class="texto-conteudo"> A SEGURIDADOS é trabalho final para o Master em Jornalismo de Dados, Automação e Storytelling do Insper. Este protótipo foi desenvolvido por Cindy Damasceno sob supervisão atenta de Eduardo Cuducos e Pedro Burgos.</p>
+                <div class="sobre-metodologia" id="sobre-metodologia">
+                    <p class="texto-topico"><a href="#sobre-metodologia">POR TRÁS DOS DADOS</a></p>
+                    <p class="texto-conteudo"> A SEGURIDADOS é trabalho final para o Master em Jornalismo de Dados, Automação e Storytelling do Insper. Este protótipo foi desenvolvido por <a target="_blank" href="https://github.com/cindydamasceno">Cindy Damasceno</a> sob supervisão atenta de Eduardo Cuducos e Pedro Burgos.</p>
                 </div>
             </div>
         <script>

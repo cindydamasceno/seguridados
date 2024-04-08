@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight:wght@400;700&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 /* HOME E CAIXAS DE DIVISAO */
 
+a, a:hover, a:focus, a:active {
+    text-decoration: underline;
+    color: inherit;
+}
+
 html, body {
     margin: 0;
     height: 100%;
@@ -33,9 +38,11 @@ html, body {
 .caixa-esquerda {
     height: 100%;
     flex: 20%;
-    background-color: #f1f1f1;
+    /* background-color: #f1f1f1; */
+    /* border-right: #99D98C solid 1px; */
     padding: 1%;
     z-index: 2;
+    position: relative;
 }
 
 .caixa-direita {
@@ -235,7 +242,7 @@ select, input{
     font-size: 21px;
     font-weight: 200;
     line-height: 35px;
-    display: flex;
+    /* display: flex; */
     margin-left: 20%;
     margin-right: 20%;
     justify-content: left !important;
@@ -273,4 +280,14 @@ code{
     margin: 0;
     margin-left: 20%;
     margin-right: 20%;
+}
+
+.menu-navegacao{
+    font-family: "Zilla Slab",serif;
+    font-size: 25px;
+    line-height: 35px;
+    margin-left: 5%;
+    /* border-right: #99D98C solid 1px; */
+    position: fixed;
+    z-index: 2;
 }
