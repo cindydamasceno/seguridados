@@ -160,7 +160,7 @@
                 </div>
                 <div class="sobre-ferramenta">
                     <p class="texto-topico"> SOBRE A SEGURIDADOS</p>
-                    <p class="texto-conteudo"> A SEGURIDADOS é uma proposta para ampliar o acesso a dados abertos sobre Crimes Violentos Letais Intencionais (CVLI) no Ceará. Ela tem como base as divulgações mensais da Secretaria da Segurança Pública e Defesa Social do Ceará (SSPDS-CE). Utilizando técnicas de automação, um robô captura todo dia 10 as informações atualizadas dos indicadores FEMINICÍDIO, HOMICÍDIO DOLOSO, LATROCÍNIO e LESÃO CORPORAL SEGUIDO DE MORTE. Estes dados são processados e podem ser acessados no formulário do tópico anterior ou via solicitações API. Esta ferramenta é um protótipo e deve ser lida com cautela.</p>
+                    <p class="texto-conteudo"> A SEGURIDADOS é uma proposta para ampliar o acesso a dados abertos sobre Crimes Violentos Letais Intencionais (CVLI) no Ceará. Ela tem como base as <a target="_blank" href="https://www.sspds.ce.gov.br/indicadores-de-seguranca-publica/">divulgações mensais da Secretaria da Segurança Pública e Defesa Social do Estado do Ceará (SSPDS-CE)</a>. Utilizando técnicas de automação, um robô captura todo dia 10 as informações atualizadas dos indicadores FEMINICÍDIO, HOMICÍDIO DOLOSO, LATROCÍNIO e LESÃO CORPORAL SEGUIDO DE MORTE. Estes dados são processados e podem ser acessados no formulário do tópico anterior ou via solicitações API. Esta ferramenta é um protótipo e deve ser lida com cautela.</p>
                 </div>
                 <div class="sobre-api">
                     <p class="texto-topico"> COMO USAR A API</p>
@@ -308,13 +308,7 @@
                                 "Idade da Vítima": "91",
                                 "Escolaridade da Vítima": "Não Alfabetizado",
                                 "Raça da Vítima": "Parda"
-                              },
-
-
-
-
-                            
-
+                              }
                         </pre>
                         </div>
                         <p class="texto-conteudo"><strong>Dicionário de dados:</strong></p>
@@ -330,91 +324,108 @@
                                 <tr>
                                     <td><code>Ano</code></td>
                                     <td>Ano da ocorrência</td>
-                                    <td>A partir de 2009</td>
+                                    <td>A partir de 01/01/2009</td>
                                 </tr>
                                 <tr>
                                     <td><code>Regiao</code></td>
                                     <td>Região administrativa do município da ocorrência</td>
-                                    <td>De acordo com o IPECE, 1-Cariri/2-...</td>
+                                    <td>De acordo com limitação do Instituto de Pesquisa e Estratégia Econômica do Ceará (IPECE)
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><code>CdRegiao</code></td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>Identificação da Região Administrativa na API</td>
+                                    <td>1-Cariri<br>
+                                        2-Centro Sul<br>
+                                        3-Grande Fortaleza<br>
+                                        4-Litoral Leste<br>
+                                        5-Litoral Norte<br>
+                                        6-Litoral Oeste / Vale do Curu<br>
+                                        7-Maciço de Baturité<br>
+                                        8-Serra da Ibiapaba<br>
+                                        9-Sertão Central<br>
+                                        10-Sertão de Canindé<br>
+                                        11-Sertão de Sobral<br>
+                                        12-Sertão dos Crateús<br>
+                                        13-Sertão dos Inhamuns<br>
+                                        14-Vale do Jaguaribe<br>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><code>CdIbge</code></td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>Código do IBGE de cada município</td>
+                                    <td><a target="_blank" href="https://www.ibge.gov.br/explica/codigos-dos-municipios.php">Confira listagem do IBGE dos códigos de cada município</a></td>
                                 </tr>
                                 <tr>
                                     <td><code>Município</code></td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>Nome do município cearense</td>
+                                    <td>Nome do município cearense</td>
                                 </tr>
                                 <tr>
                                     <td><code>AIS</code></td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>Áreas Integradas de Segurança – Divisão territorial da SSPDS-CE </td>
+                                    <td><a target="_blank" href="https://www.sspds.ce.gov.br/ais/">Confira lista de AIS no portal da SSPDS-CE</a></td>
                                 </tr>
                                 <tr>
                                     <td><code>Natureza</code></td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>Natureza do Crime Violento Letal Intecional (CVLI)</td>
+                                    <td>Feminicídio, Homicídio Doloso, Lesão corporal seguida de morte, Roubo seguido de morte </td>
                                 </tr>
                                 <tr>
                                     <td><code>CdIndicador</code></td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>Identificação da natureza do Crime Violento Letal Intecional (CVLI) na API</td>
+                                    <td>1-FEMINICÍDIO<br>
+                                        2-HOMICIDIO DOLOSO<br>
+                                        3-LESAO CORPORAL SEGUIDA DE MORTE<br>
+                                        4-ROUBO SEGUIDO DE MORTE (LATROCINIO)<br></td></td>
                                 </tr>
                                 <tr>
                                     <td><code>Data</code></td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>Data da ocorrência</td>
+                                    <td>Data da ocorrência</td>
                                 </tr>
                                 <tr>
                                     <td><code>Hora</code></td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>Hora da ocorrência</td>
+                                    <td>Hora da ocorrência</td>
                                 </tr>
                                 <tr>
                                     <td><code>Dia da Semana</code></td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>Dia da ocorrência</td>
+                                    <td>Dia da ocorrência</td>
                                 </tr>
                                 <tr>
                                     <td><code>Meio Empregado</code></td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>Tipo de arma utilizada na ocorrência</td>
+                                    <td>Arma de fogo, Arma branca, Outros meios, meio não informado</td>
                                 </tr>
                                 <tr>
                                     <td><code>Gênero</code></td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>Gênero da vítima</td>
+                                    <td>Feminino, Masculino, Não informado</td>
                                 </tr>
                                 <tr>
                                     <td><code>Idade da Vítima</code></td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>Idade da Vítima</td>
+                                    <td>#NULL: Valor não disponibilizado pela SSPDS-CE</td>
                                 </tr>
                                 <tr>
                                     <td><code>Escolaridade da Vítima</code></td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>Escolaridade da Vítima</td>
+                                    <td>Não informada, Alfabetizado, Ensino Fundamental Completo,Ensino Fundamental Incompleto, Ensino Médio Completo,Ensino Médio Incompleto, Não Alfabetizado, Superior Completo, Superior Incompleto </td>
                                 </tr>
                                 <tr>
                                     <td><code>Raça da Vítima</code></td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>Raça da Vítima</td>
+                                    <td>Amarela, Branca, Indígena, Não informada, Parda, Preta</td>
                                 </tr>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
                 <div class="sobre-metodologia">
-                    <p class="texto-topico"> Lorem ipsum.</p>
-                    <p class="texto-conteudo"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ligula quis turpis varius volutpat eget a dolor. Nullam et felis metus. Suspendisse non neque bibendum, laoreet sem vel, sollicitudin sapien.</p>
+                    <p class="texto-topico"> POR TRÁS DOS DADOS</p>
+                    <p class="texto-conteudo"> A SEGURIDADOS é trabalho final para o Master em Jornalismo de Dados, Automação e Storytelling do Insper. Este protótipo foi desenvolvido por Cindy Damasceno sob supervisão atenta de Eduardo Cuducos e Pedro Burgos.</p>
                 </div>
             </div>
         <script>

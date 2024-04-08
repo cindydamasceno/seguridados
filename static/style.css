@@ -51,10 +51,11 @@ html, body {
 .sobre-ferramenta, .sobre-api, .sobre-metodologia {
     position: relative;
     /* height: 100%; */
-    flex: 80%;
+    flex: 1;
     padding: 1%;
     z-index: 1;
     margin-bottom: 0;
+    /* flex-direction: row !important; */
     /* background-color: #f1f1f1; */
 }
 
