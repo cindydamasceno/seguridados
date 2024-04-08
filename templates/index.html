@@ -178,7 +178,7 @@
                                 <tr>
                                     <td><code>/CEARA</code></td>
                                     <td><code>GET</code</td>
-                                    <td>Retorna os INDICADORES CRIMINAIS por ano em todo o estado</td>
+                                    <td>Retorna os INDICADORES CRIMINAIS por ANO em todo o estado</td>
                                 </tr>
                                 <tr>
                                     <td><code>/REGIAO</code></td>
@@ -203,7 +203,7 @@
                                 <!-- Adicione mais linhas conforme necessário -->
                             </tbody>
                         </table>
-                        <p class="texto-conteudo"> Exemplo de resultados</p>
+                        <p class="texto-conteudo"><strong>Exemplo de resultados</strong></p>
                         <div class="codigo-api">
                             <pre>
                             # NO ENDPOINT /CEARÁ:
@@ -231,11 +231,185 @@
                             }
 
                             # NO ENDPOINT /REGIAO
+                            {
+                                "Cariri":
+                                {
+                                    "ANO":{
+                                        "OCORRENCIAS": #VALOR
+                                    }
+                                }
+                                "Centro Sul":
+                                {
+                                    "ANO":{
+                                        "OCORRENCIAS" #VALOR
+                                    }
+                                }
+                            }
+
+                            # NO ENDPOINT REGIAO/1 (PARA DADOS DO CARIRI)
+                            {
+                                "Ano": 2009,
+                                "Regiao": "Cariri",
+                                "CdRegiao": 1,
+                                "CdIbge": 2303204,
+                                "Município": "Caririaçu",
+                                "AIS": "AIS 19",
+                                "Natureza": "HOMICIDIO DOLOSO",
+                                "CdIndicador": 2,
+                                "Data": "01-01-2009",
+                                "Hora": "00:00",
+                                "Dia da Semana": "Quinta",
+                                "Meio Empregado": "Arma branca",
+                                "Gênero": "Masculino",
+                                "Idade da Vítima": "20",
+                                "Escolaridade da Vítima": "Não Informada",
+                                "Raça da Vítima": "Não Informada"
+                              },
+
+                              # NO ENDPOINT MUNICÍPIO/{CÓDIGO IBGE}
+                              (PARA PESQUISAS SOBRE FORTALEZA[2304400])
+
+                              {
+                                "Ano": 2024,
+                                "Regiao": "Grande Fortaleza",
+                                "CdRegiao": 3,
+                                "CdIbge": 2304400,
+                                "Município": "Fortaleza",
+                                "AIS": "AIS 10",
+                                "Natureza": "HOMICIDIO DOLOSO",
+                                "CdIndicador": 2,
+                                "Data": "29-02-2024",
+                                "Hora": "23:57",
+                                "Dia da Semana": "Quinta",
+                                "Meio Empregado": "Arma de fogo",
+                                "Gênero": "Masculino",
+                                "Idade da Vítima": "Não Informada",
+                                "Escolaridade da Vítima": "Não Informada",
+                                "Raça da Vítima": "Não Informada"
+                              }
+
+                              # NO ENDPOINT /INDICADOR/1 
+                              (PARA DADOS DE FEMINICÍDIO)
+
+                              {
+                                "Ano": 2018,
+                                "Regiao": "Sertão dos Inhamuns",
+                                "CdRegiao": 13,
+                                "CdIbge": 2313302,
+                                "Município": "Tauá",
+                                "AIS": "AIS 22",
+                                "Natureza": "FEMINICÍDIO",
+                                "CdIndicador": 1,
+                                "Data": "17-06-2018",
+                                "Hora": "16:59",
+                                "Dia da Semana": "Domingo",
+                                "Meio Empregado": "Outros meios",
+                                "Gênero": "Feminino",
+                                "Idade da Vítima": "91",
+                                "Escolaridade da Vítima": "Não Alfabetizado",
+                                "Raça da Vítima": "Parda"
+                              },
+
+
+
+
                             
-                        
-                        
+
                         </pre>
                         </div>
+                        <p class="texto-conteudo"><strong>Dicionário de dados:</strong></p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>VALOR</th>
+                                    <th>COMO LER</th>
+                                    <th>DETALHES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>Ano</code></td>
+                                    <td>Ano da ocorrência</td>
+                                    <td>A partir de 2009</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Regiao</code></td>
+                                    <td>Região administrativa do município da ocorrência</td>
+                                    <td>De acordo com o IPECE, 1-Cariri/2-...</td>
+                                </tr>
+                                <tr>
+                                    <td><code>CdRegiao</code></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><code>CdIbge</code></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Município</code></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><code>AIS</code></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Natureza</code></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><code>CdIndicador</code></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Data</code></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Hora</code></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Dia da Semana</code></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Meio Empregado</code></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Gênero</code></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Idade da Vítima</code></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Escolaridade da Vítima</code></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Raça da Vítima</code></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
                 <div class="sobre-metodologia">
