@@ -74,6 +74,9 @@ def API_REGIAO():
     if formato=="Planilha(.xlsx)":
         filtro.to_excel(f"{regiao}_PLANILHA_{ano}_{indicador}.xlsx",index=False)
         return send_file(f"{regiao}_PLANILHA_{ano}_{indicador}.xlsx", as_attachment=True)
+    
+    if len(filtro)<1:
+        return render_template("erro.html")
 
     return
 
@@ -114,6 +117,9 @@ def API_CEARA():
     if formato=="Planilha(.xlsx)":
         filtro.to_excel(f"ceara_planilha_{ano}_{indicador}.xlsx",index=False)
         return send_file(f"ceara_planilha_{ano}_{indicador}.xlsx", as_attachment=True)
+    
+    if len(filtro)<1:
+        return render_template("erro.html")
 
     return 
 
@@ -149,7 +155,7 @@ def PESQUISA():
         filtro=filtro[pd.to_datetime(filtro["Data"],format="%d-%m-%Y") <= pd.to_datetime(data_fim)]
 
     if len(filtro)<1:
-        return "Ahh :( Não há dados com o filtro escolhido"
+        return render_template("erro.html")
 
     # BAIXA RESULTADO DE ACORDO COM O FORMATO ESCOLHIDO
         

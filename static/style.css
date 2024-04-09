@@ -118,21 +118,6 @@ html, body {
     cursor: pointer;
 }
 
-/* BOTAO PARA FICAR ATIVO QUANDO MUDAR A DIV */
-
-.active{
-    width: 100px;
-    background-color: #19778f;
-    border-radius: 100px;
-    color: #fff;
-    font-weight: 900;
-    padding: 15px 15px;
-    text-transform: uppercase;
-    border-width: 0;
-    margin-right: 1%;
-    cursor: pointer;
-}
-
 /* BOTAO ENVIO DE FORMULÁRIO */
 
 .botao-enviar{
@@ -290,4 +275,58 @@ code{
     /* border-right: #99D98C solid 1px; */
     position: fixed;
     z-index: 2;
+}
+
+
+.resultado-erro h2{
+    font-family: "Zilla Slab",serif;
+    color: #000;
+    font-size: 96px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.resultado-erro{
+    margin: 10%;
+    width: 100%;
+}
+
+.resultado-erro h4{
+    margin-top: 0;
+    font-family: "Zilla Slab",serif;
+    color: #000;
+    font-size: 96px;
+    font-weight: 400;
+    width: 80%;
+}
+
+.resultado-erro button{
+    margin-top: 1%;
+    width: fit-content;
+    font-size: 36px;
+    background-color: #B5E48C;
+    color: #000;
+    font-weight: 900;
+    padding: 15px 15px;
+    text-transform: uppercase;
+    border-width: 0;
+    display: block;
+    /* margin: auto; */
+    margin-bottom: 2%;
+}
+
+.resultado-erro button:hover{
+    font-size: 36px;
+    margin-top: 1%;
+    width: fit-content;
+    background-color: #76C893;
+    color: #000;
+    font-weight: 900;
+    padding: 15px 15px;
+    text-transform: uppercase;
+    border-width: 0;
+    cursor: pointer;
+    display: block;
+    /* margin: auto; */
+    margin-bottom: 2%;
 }
