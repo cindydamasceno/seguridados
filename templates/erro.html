@@ -8,9 +8,10 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.png')}}">
 </head>
 
-<div class="resultado-erro">
-    <h2>Valha!</h2>
-    <h4>Não tenho nenhum dado com esses filtros.</h4>
-
-    <button><a target="_blank" href="https://seguridados-ce.onrender.com/">BUSCAR NOVAMENTE</a></button>
+<div class="container-erro">
+    <div class="resultado-erro">
+        <h2>Valha!</h2><img src="{{ url_for('static', filename='img/ret-erro.svg') }}">
+    </div>
+        <h4>Não tenho nenhum dado com esses filtros.</h4>
+        <button><a target="_blank" href="https://seguridados-ce.onrender.com/">BUSCAR NOVAMENTE</a></button>
 </div>

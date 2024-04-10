@@ -287,21 +287,27 @@ code{
 }
 
 .resultado-erro{
-    margin: 10%;
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-bottom: 0;
     width: 100%;
+    display: flex;
+    align-items: baseline;
 }
 
-.resultado-erro h4{
+.container-erro h4{
     margin-top: 0;
     font-family: "Zilla Slab",serif;
     color: #000;
     font-size: 96px;
     font-weight: 400;
     width: 80%;
+    margin-left: 10%;
 }
 
-.resultado-erro button{
+.container-erro button{
     margin-top: 1%;
+    margin-left: 10%;
     width: fit-content;
     font-size: 36px;
     background-color: #B5E48C;
@@ -312,10 +318,16 @@ code{
     border-width: 0;
     display: block;
     /* margin: auto; */
-    margin-bottom: 2%;
+    /* margin-bottom: 2%; */
+    font-family: "Zilla Slab",serif;
+
 }
 
-.resultado-erro button:hover{
+.container-erro{
+    margin-bottom: 0;
+}
+
+.container-erro button:hover{
     font-size: 36px;
     margin-top: 1%;
     width: fit-content;
@@ -328,5 +340,10 @@ code{
     cursor: pointer;
     display: block;
     /* margin: auto; */
-    margin-bottom: 2%;
+    /* margin-bottom: 2%; */
+    font-family: "Zilla Slab",serif;
+}
+
+.resultado-erro img{
+    margin-left: 3%;
 }
