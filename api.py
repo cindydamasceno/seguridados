@@ -13,12 +13,10 @@ ATUALIZA_URL=os.getenv("ATUALIZA_URL")
 ## ACESSO AO BANCO DE DADOS NOVOS
 df=dados_novos_df()
 
-# VARIAVEL GLOVAL PARA PEGAR RASPADOR
-data_raspagem=None
-
 @app.route("/",methods=["GET"])
 def home():
-    global data_raspagem
+    f=open("atualizacao_data.json")
+    data_raspagem=json.load(f)
     indicadores=sorted([indicador for indicador in df["Natureza"].unique()])
     regioes=sorted([regiao for regiao in df["Regiao"].unique()])
     municipios=sorted([municipio for municipio in df["Município"].unique()])
@@ -28,8 +26,9 @@ def home():
 
 @app.route(f"/{ATUALIZA_URL}",methods=["GET"])
 def agenda_seguridados():
-    global data_raspagem
     data_raspagem=datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=-3))).strftime("%d-%m-%Y-%Hh%M")
+    with open("atualizacao_data.json", "w") as f:
+        f.write(json.dumps(data_raspagem, ensure_ascii=False))
     atualiza_seguridados()
     return f"Informações atualizadas em {data_raspagem}"
 
