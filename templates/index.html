@@ -13,21 +13,24 @@
         <a target="_blank" href="https://github.com/cindydamasceno/seguridados"><img src="{{ url_for('static', filename='img/github.png') }}"></a>
     </div>
     <div class="fundo-principal">
-            <div class="caixa-esquerda">
-                <div class="menu-navegacao" style="margin-top: 5%;">
-                    <a href="#formulario">Formulário</a><br>
-                    <a href="#sobre-ferramenta">Sobre</a><br>
-                    <a href="#sobre-api">API</a><br>
-                    <a href="#dicionario-dados">Dicionário de dados</a><br>
-                    <a href="#sobre-dados">Posso usar esses dados?</a><br>
-                    <a href="#sobre-metodologia">Contato</a><br>
-                </div>
+        <div class="caixa-esquerda">
+            <div class="menu-navegacao">
+                <ul>
+                    <li><a href="#formulario">Formulário</a></li><br>
+                    <li><a href="#sobre-ferramenta">Sobre</a></li><br>
+                    <li><a href="#sobre-api">API</a></li><br>
+                    <li><a href="#dicionario-dados">Dicionário de dados</a></li><br>
+                    <li><a href="#sobre-dados">Uso dos dados</a></li><br>
+                    <li><a href="#sobre-metodologia">Contato</a></li>
+                </ul>
             </div>
+        </div>
+
             <div class="caixa-direita">
                 <div class="cabecalho-logo">
                     <img src="{{ url_for('static', filename='img/seguridados-logo.svg') }}">
-                    <p><span style="text-transform: uppercase; font-family: 'Courier New', Courier, monospace; font-size: 21px;font-weight: 400;display: flex; margin-left: 20%;margin-right: 20%;justify-content: center"><strong>Preencha para baixar</strong>&nbsp;dados de CVLI no Ceará</span></p>
-                    <p><span style="text-transform: uppercase; font-family: 'Courier New', Courier, monospace; font-size: 21px;font-weight: 400;display: flex; margin-left: 20%;margin-right: 20%;justify-content: center">Última atualização: {{ data_raspagem }}/ Dados até {{ data_max.strftime('%d/%m/%Y') }} </span></p>
+                    <p class="texto-abre">Preencha para baixar dados de CVLI no Ceará (até {{ data_max.strftime('%d/%m/%Y')}})</p>
+                    <p class="texto-abre">Última atualização: {{ data_raspagem }}</p>
                 </div>
                 <div class="caixa-formulario" id="formulario">
                     <!-- ESCOLHER O FORMULÁRIO COM TOGGLE (BOTAO DE ALTERNÂNCIA) -->
@@ -333,13 +336,12 @@
                                 <tr>
                                     <td><code>Ano</code></td>
                                     <td>Ano da ocorrência</td>
-                                    <td>A partir de 01/01/2009</td>
+                                    <td>De 01/01/2009 até {{data_max.strftime('%d/%m/%Y')}}</td>
                                 </tr>
                                 <tr>
                                     <td><code>Regiao</code></td>
                                     <td>Região administrativa do município da ocorrência</td>
-                                    <td>De acordo com limitação do Instituto de Pesquisa e Estratégia Econômica do Ceará (IPECE)
-                                    </td>
+                                    <td><a href="https://www.ipece.ce.gov.br/wp-content/uploads/sites/45/2016/06/Lista_Regioes_Planejamento_Ceara.xlsx">De acordo com limitação do Instituto de Pesquisa e Estratégia Econômica do Ceará (IPECE).</a></td>
                                 </tr>
                                 <tr>
                                     <td><code>CdRegiao</code></td>
@@ -362,13 +364,13 @@
                                 </tr>
                                 <tr>
                                     <td><code>CdIbge</code></td>
-                                    <td>Código do IBGE de cada município</td>
+                                    <td>Código do IBGE do município da ocorrência</td>
                                     <td><a target="_blank" href="https://www.ibge.gov.br/explica/codigos-dos-municipios.php">Confira listagem do IBGE dos códigos de cada município</a></td>
                                 </tr>
                                 <tr>
                                     <td><code>Município</code></td>
-                                    <td>Nome do município cearense</td>
-                                    <td>Nome do município cearense</td>
+                                    <td>Nome do município da ocorrência</td>
+                                    <td>Nome do município ocorrência</td>
                                 </tr>
                                 <tr>
                                     <td><code>AIS</code></td>
@@ -378,7 +380,7 @@
                                 <tr>
                                     <td><code>Natureza</code></td>
                                     <td>Natureza do Crime Violento Letal Intecional (CVLI)</td>
-                                    <td>Feminicídio, Homicídio Doloso, Lesão corporal seguida de morte, Roubo seguido de morte </td>
+                                    <td>FEMINICÍDIO,HOMICIDIO DOLOSO,LESAO CORPORAL SEGUIDA DE MORTE,ROUBO SEGUIDO DE MORTE (LATROCINIO)</td>
                                 </tr>
                                 <tr>
                                     <td><code>CdIndicador</code></td>
@@ -438,7 +440,7 @@
                 </div>
                 <div class="sobre-metodologia" id="sobre-metodologia">
                     <p class="texto-topico"><a href="#sobre-metodologia">POR TRÁS DOS DADOS</a></p>
-                    <p class="texto-conteudo"> A SEGURIDADOS é trabalho final para o Master em Jornalismo de Dados, Automação e Storytelling do Insper. Este protótipo foi desenvolvido por <a target="_blank" href="https://github.com/cindydamasceno">Cindy Damasceno</a> sob supervisão atenta de Eduardo Cuducos e Pedro Burgos.</p>
+                    <p class="texto-conteudo">A SEGURIDADOS é trabalho final para o Master em Jornalismo de Dados, Automação e Storytelling do Insper. Este protótipo foi desenvolvido por <a target="_blank" href="https://github.com/cindydamasceno">Cindy Damasceno</a> sob supervisão atenta de Eduardo Cuducos e Pedro Burgos.</p>
                 </div>
             </div>
         <script>
