@@ -1,6 +1,7 @@
 from flask import Flask,jsonify,send_file,request,render_template
 from datetime import datetime,timedelta,timezone
 from raspador_dados import atualiza_seguridados,dados_novos_df
+from salva_data import salva_data,obter_data_planilha
 from dotenv import load_dotenv
 import pandas as pd
 import json,os
@@ -13,10 +14,16 @@ ATUALIZA_URL=os.getenv("ATUALIZA_URL")
 ## ACESSO AO BANCO DE DADOS NOVOS
 df=dados_novos_df()
 
+@app.route(f"/{ATUALIZA_URL}",methods=["GET"])
+def agenda_seguridados():
+    data_raspagem=datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=-3))).strftime("%d-%m-%Y-%Hh%M")
+    salva_data()
+    atualiza_seguridados()
+    return f"Informações atualizadas em {data_raspagem}"
+
 @app.route("/",methods=["GET"])
 def home():
-    f=open("atualizacao_data.json")
-    data_raspagem=json.load(f)
+    data_raspagem=obter_data_planilha()
     indicadores=sorted([indicador for indicador in df["Natureza"].unique()])
     regioes=sorted([regiao for regiao in df["Regiao"].unique()])
     municipios=sorted([municipio for municipio in df["Município"].unique()])
@@ -24,13 +31,6 @@ def home():
     anos=sorted([ano for ano in df["Ano"].unique()])
     return render_template("index.html",data_raspagem=data_raspagem,anos=anos,indicadores=indicadores,regioes=regioes,municipios=municipios,data_max=data_max)
 
-@app.route(f"/{ATUALIZA_URL}",methods=["GET"])
-def agenda_seguridados():
-    data_raspagem=datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=-3))).strftime("%d-%m-%Y-%Hh%M")
-    with open("atualizacao_data.json", "w") as f:
-        f.write(json.dumps(data_raspagem, ensure_ascii=False))
-    atualiza_seguridados()
-    return f"Informações atualizadas em {data_raspagem}"
 
 # FORMULÁRIOS A PARTIR DAQUI
 
