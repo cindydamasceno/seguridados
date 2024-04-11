@@ -1,6 +1,6 @@
 # SOBRE A SEGURIDADOS
 
-A SEGURIDADOS é uma proposta para ampliar o acesso a dados abertos sobre Crimes Violentos Letais Intencionais (CVLI) no Ceará. Este protótpio tem como base as divulgações mensais da Secretaria da Segurança Pública e Defesa Social do Estado do Ceará (SSPDS-CE).
+A SEGURIDADOS é uma proposta para ampliar o acesso a dados abertos sobre Crimes Violentos Letais Intencionais (CVLI) no Ceará. Este protótipo tem como base as divulgações mensais da Secretaria da Segurança Pública e Defesa Social do Estado do Ceará (SSPDS-CE).
 
 Utilizando técnicas de automação, um robô captura todo dia 10 as informações atualizadas dos indicadores FEMINICÍDIO, HOMICÍDIO DOLOSO, LATROCÍNIO e LESÃO CORPORAL SEGUIDO DE MORTE. Estes dados são processados e podem ser acessados no formulário do tópico anterior ou via solicitações API.
 
