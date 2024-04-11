@@ -107,7 +107,7 @@ html, body {
 }
 
 
-.sobre-ferramenta, .sobre-api, .sobre-metodologia, .sobre-dados {
+.sobre-ferramenta, .sobre-api, .sobre-metodologia, .sobre-dados, .contato {
     position: relative;
     /* height: 100%; */
     flex: 1;
