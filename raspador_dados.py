@@ -29,6 +29,7 @@ def raspagem():
             print(f"Tentativa: {tentativas+1}")
             soup = bs(requests.get(f"https://www.sspds.ce.gov.br/html/estatisticas-{ano}/").content,"html.parser").find_all("ul", {"class": 'ListaEst col3 -Laranja'})[2]
             link=soup.find("a",{"class":"box"})["href"]
+            print(link)
             print(f"Dados acessados com sucesso na tentativa {tentativas+1}. Iniciando padronização")
 
             break

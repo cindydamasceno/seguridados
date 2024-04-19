@@ -27,7 +27,8 @@ def home():
     indicadores=sorted([indicador for indicador in df["Natureza"].unique()])
     regioes=sorted([regiao for regiao in df["Regiao"].unique()])
     municipios=sorted([municipio for municipio in df["Município"].unique()])
-    data_max=pd.to_datetime(df["Data"].iloc[-1],format="%d-%m-%Y")
+    # data_max=pd.to_datetime(df["Data"].iloc[-1],format="%d-%m-%Y")
+    data_max=max(pd.to_datetime(df["Data"],format="%d-%m-%Y"))
     anos=sorted([ano for ano in df["Ano"].unique()])
     return render_template("index.html",data_raspagem=data_raspagem,anos=anos,indicadores=indicadores,regioes=regioes,municipios=municipios,data_max=data_max)
 
